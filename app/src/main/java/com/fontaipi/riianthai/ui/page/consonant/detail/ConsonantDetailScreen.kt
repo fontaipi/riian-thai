@@ -3,7 +3,6 @@ package com.fontaipi.riianthai.ui.page.consonant.detail
 import android.media.MediaPlayer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,15 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.VolumeOff
 import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,14 +26,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,12 +42,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.fontaipi.riianthai.model.Consonant
 import com.fontaipi.riianthai.model.ConsonantClass
+import com.fontaipi.riianthai.model.EndingSound
 import com.fontaipi.riianthai.ui.component.WordCard
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
 import com.fontaipi.riianthai.ui.theme.MiddleClassColor
-import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
@@ -70,6 +72,10 @@ fun ConsonantDetailScreen(
     onBackClick: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
+
+    var showDiphthongDialog by remember { mutableStateOf(false) }
+    var showEndingConsonantDialog by remember { mutableStateOf(false) }
+
     Surface {
         Column(
             modifier = Modifier
@@ -122,9 +128,10 @@ fun ConsonantDetailScreen(
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column(
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier.weight(3 / 5f),
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     verticalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
@@ -149,7 +156,7 @@ fun ConsonantDetailScreen(
                                                 style = MaterialTheme.typography.titleMedium
                                             )
                                         }
-                                        IconButton(
+                                        FilledIconButton(
                                             onClick = {
                                                 coroutineScope.launch {
                                                     val mediaPlayer = MediaPlayer()
@@ -174,7 +181,7 @@ fun ConsonantDetailScreen(
                                     }
                                 }
                                 Column(
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier.weight(2 / 5f),
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     if (consonantDetailState.consonant.picture.isNotEmpty()) {
@@ -190,7 +197,6 @@ fun ConsonantDetailScreen(
                                     )
                                 }
                             }
-
                             Divider()
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -206,28 +212,51 @@ fun ConsonantDetailScreen(
                                         "Ending sound:",
                                         style = MaterialTheme.typography.titleMedium
                                     )
-                                    Text(text = "/k/", style = MaterialTheme.typography.titleMedium)
+                                    Text(
+                                        text = consonantDetailState.consonant.endingSound.phonetic,
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
                                 }
-                                Tag(
-                                    icon = Icons.Rounded.VolumeOff,
-                                    text = "Silent",
-                                    color = MaterialTheme.colorScheme.tertiaryContainer,
-                                )
-                            }
-                            Divider()
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    "Live ending consonant",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-                                Tag(
-                                    text = "Dead",
-                                    color = MaterialTheme.colorScheme.tertiaryContainer,
-                                )
+                                if (consonantDetailState.consonant.endingSound != EndingSound.Impossible) {
+                                    Column(
+                                        horizontalAlignment = Alignment.End,
+                                    ) {
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                        ) {
+                                            Tag(text = consonantDetailState.consonant.endingSound.endingClass.name)
+                                            IconButton(onClick = {
+                                                showEndingConsonantDialog = true
+                                            }) {
+                                                Icon(
+                                                    imageVector = Icons.Outlined.Info,
+                                                    contentDescription = null
+                                                )
+                                            }
+                                        }
+                                        if (consonantDetailState.consonant.endingSound == EndingSound.Y || consonantDetailState.consonant.endingSound == EndingSound.W) {
+                                            Row(
+                                                verticalAlignment = Alignment.CenterVertically,
+                                            ) {
+                                                Tag(text = "Diphthong")
+                                                IconButton(onClick = {
+                                                    showDiphthongDialog = true
+                                                }) {
+                                                    Icon(
+                                                        imageVector = Icons.Outlined.Info,
+                                                        contentDescription = null
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                } else {
+                                    Text(
+                                        text = "Invalid consonant ending",
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+                                }
                             }
                         }
                         Spacer(modifier = Modifier.height(24.dp))
@@ -261,43 +290,16 @@ fun ConsonantDetailScreen(
             }
         }
     }
-}
 
-@Composable
-fun Tag(
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    text: String,
-    color: Color = MaterialTheme.colorScheme.surfaceVariant,
-) {
-    Surface(
-        shape = CircleShape,
-        color = color,
-    ) {
-        Row(
-            modifier = modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            icon?.let {
-                Icon(imageVector = it, contentDescription = it.name)
-            }
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
-            )
-        }
+    if (showDiphthongDialog) {
+        DiphthongDialog(
+            onDismissRequest = { showDiphthongDialog = false }
+        )
     }
-}
 
-@Preview
-@Composable
-private fun IconTagPreview() {
-    RiianThaiTheme {
-        Tag(
-            icon = Icons.Rounded.VolumeUp,
-            text = "Silent",
+    if (showEndingConsonantDialog) {
+        EndingConsonantDialog(
+            onDismissRequest = { showEndingConsonantDialog = false }
         )
     }
 }
@@ -315,6 +317,7 @@ private fun ConsonantDetailScreenPreview() {
                     associatedWord = "ไก่",
                     meaning = "Chicken",
                     consonantClass = ConsonantClass.Low,
+                    endingSound = EndingSound.Impossible,
                     picture = "",
                     audio = "consonants/ก.mp3"
                 )

@@ -2,9 +2,7 @@ package com.fontaipi.riianthai.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import androidx.room.Update
 import androidx.room.Upsert
-import com.fontaipi.riianthai.data.database.entity.ConsonantCount
 import com.fontaipi.riianthai.data.database.entity.ConsonantEntity
 import kotlinx.coroutines.flow.Flow
 

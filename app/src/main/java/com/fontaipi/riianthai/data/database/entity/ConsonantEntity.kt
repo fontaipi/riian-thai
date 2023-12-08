@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.fontaipi.riianthai.model.Consonant
 import com.fontaipi.riianthai.model.ConsonantClass
+import com.fontaipi.riianthai.model.EndingSound
 
 @Entity(tableName = "consonant")
 data class ConsonantEntity(
@@ -16,14 +17,11 @@ data class ConsonantEntity(
     val picture: String = "",
     @ColumnInfo(name = "consonant_class")
     val consonantClass: ConsonantClass,
+    @ColumnInfo(name = "ending_sound")
+    val endingSound: EndingSound,
     @ColumnInfo(name = "associated_word")
     val associatedWord: String,
     val meaning: String,
-    val count: Int,
-)
-
-data class ConsonantCount(
-    val id: Long,
     val count: Int,
 )
 
@@ -35,6 +33,7 @@ fun ConsonantEntity.asExternalModel(): Consonant =
         audio = audio,
         picture = picture,
         consonantClass = consonantClass,
+        endingSound = endingSound,
         associatedWord = associatedWord,
         meaning = meaning,
         count = count

@@ -10,6 +10,24 @@ enum class ConsonantClass {
     All
 }
 
+enum class EndingSound(val endingClass: EndingClass, val phonetic: String) {
+    N(EndingClass.Live, "-n"),
+    Ng(EndingClass.Live, "-ng"),
+    M(EndingClass.Live, "-m"),
+    Y(EndingClass.Live, "-y"),
+    W(EndingClass.Live, "-w"),
+    P(EndingClass.Dead, "-p"),
+    T(EndingClass.Dead, "-t"),
+    K(EndingClass.Dead, "-k"),
+    Impossible(EndingClass.None, ""),
+}
+
+enum class EndingClass {
+    Live,
+    Dead,
+    None
+}
+
 @Serializable
 data class Consonant(
     val id: Long = 0,
@@ -18,6 +36,7 @@ data class Consonant(
     val audio: String,
     val picture: String = "",
     val consonantClass: ConsonantClass,
+    val endingSound: EndingSound,
     val associatedWord: String,
     val meaning: String,
     val count: Int = 0,
@@ -31,6 +50,7 @@ fun Consonant.asEntity(): ConsonantEntity =
         audio = audio,
         picture = picture,
         consonantClass = consonantClass,
+        endingSound = endingSound,
         associatedWord = associatedWord,
         meaning = meaning,
         count = count

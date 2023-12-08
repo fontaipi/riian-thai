@@ -6,7 +6,8 @@
         "picture": "picture/picture_gaaw_gai.png",
         "consonantClass": "Mid",
         "associatedWord": "ไก่",
-        "meaning": "Chicken"
+        "meaning": "Chicken",
+        "endingSound": "K"
     },
     {
         "thai": "ข",
@@ -15,7 +16,8 @@
         "picture": "picture/picture_khaaw_khai.png",
         "consonantClass": "High",
         "associatedWord": "ไข่",
-        "meaning": "Egg"
+        "meaning": "Egg",
+        "endingSound": "K"
     },
     {
         "thai": "ฃ",
@@ -24,7 +26,8 @@
         "picture": "picture/picture_khaaw_khuat.png",
         "consonantClass": "High",
         "associatedWord": "ขวด",
-        "meaning": "Bottle"
+        "meaning": "Bottle",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ค",
@@ -33,7 +36,8 @@
         "picture": "picture/picture_khaaw_khwaai.png",
         "consonantClass": "Low",
         "associatedWord": "ควาย",
-        "meaning": "Water buffalo"
+        "meaning": "Water buffalo",
+        "endingSound": "K"
     },
     {
         "thai": "ฅ",
@@ -42,7 +46,8 @@
         "picture": "picture/picture_khaaw_khon.png",
         "consonantClass": "Low",
         "associatedWord": "คน",
-        "meaning": "Person"
+        "meaning": "Person",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ฆ",
@@ -51,7 +56,8 @@
         "picture": "picture/picture_khaaw_ra_khang.png",
         "consonantClass": "Low",
         "associatedWord": "ระฆัง",
-        "meaning": "Temple bell"
+        "meaning": "Temple bell",
+        "endingSound": "K"
     },
     {
         "thai": "ง",
@@ -60,7 +66,8 @@
         "picture": "picture/picture_ngaaw_nguu.png",
         "consonantClass": "Low",
         "associatedWord": "งู",
-        "meaning": "Snake"
+        "meaning": "Snake",
+        "endingSound": "Ng"
     },
     {
         "thai": "จ",
@@ -69,7 +76,8 @@
         "picture": "picture/picture_jaaw_jaan.png",
         "consonantClass": "Mid",
         "associatedWord": "จาน",
-        "meaning": "Plate"
+        "meaning": "Plate",
+        "endingSound": "T"
     },
     {
         "thai": "ฉ",
@@ -78,7 +86,8 @@
         "picture": "picture/picture_chaaw_ching.png",
         "consonantClass": "High",
         "associatedWord": "ฉิ่ง",
-        "meaning": "Small cymbal"
+        "meaning": "Small cymbal",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ช",
@@ -87,7 +96,8 @@
         "picture": "picture/picture_chaaw_chaang.png",
         "consonantClass": "Low",
         "associatedWord": "ช้าง",
-        "meaning": "Elephant"
+        "meaning": "Elephant",
+        "endingSound": "T"
     },
     {
         "thai": "ซ",
@@ -96,7 +106,8 @@
         "picture": "picture/picture_saaw_so.png",
         "consonantClass": "Low",
         "associatedWord": "โซ่",
-        "meaning": "Chain for animals"
+        "meaning": "Chain for animals",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ฌ",
@@ -105,7 +116,8 @@
         "picture": "picture/picture_chaaw_cher.png",
         "consonantClass": "Low",
         "associatedWord": "เฌอ",
-        "meaning": "Small tree"
+        "meaning": "Small tree",
+        "endingSound": "T"
     },
     {
         "thai": "ญ",
@@ -114,7 +126,8 @@
         "picture": "picture/picture_yaaw_ying.png",
         "consonantClass": "Low",
         "associatedWord": "หญิง",
-        "meaning": "Woman"
+        "meaning": "Woman",
+        "endingSound": "N"
     },
     {
         "thai": "ฎ",
@@ -123,7 +136,8 @@
         "picture": "picture/picture_daaw_cha_daa.png",
         "consonantClass": "Mid",
         "associatedWord": "ชฎา",
-        "meaning": "Dance hat"
+        "meaning": "Dance hat",
+        "endingSound": "T"
     },
     {
         "thai": "ฏ",
@@ -132,7 +146,8 @@
         "picture": "picture/picture_dtaaw_bpa_dtak.png",
         "consonantClass": "Mid",
         "associatedWord": "ปฏัก",
-        "meaning": "Harpoon"
+        "meaning": "Harpoon",
+        "endingSound": "T"
     },
     {
         "thai": "ฐ",
@@ -141,7 +156,8 @@
         "picture": "picture/picture_thaaw_thaan.png",
         "consonantClass": "High",
         "associatedWord": "ฐาน",
-        "meaning": "Pedestal"
+        "meaning": "Pedestal",
+        "endingSound": "T"
     },
     {
         "thai": "ฑ",
@@ -150,7 +166,8 @@
         "picture": "picture/picture_thaaw_mon_tho.png",
         "consonantClass": "Low",
         "associatedWord": "มณโฑ",
-        "meaning": "Ramayana character"
+        "meaning": "Ramayana character",
+        "endingSound": "T"
     },
     {
         "thai": "ฒ",
@@ -159,7 +176,8 @@
         "picture": "picture/picture_thaaw_phuu_thao.png",
         "consonantClass": "Low",
         "associatedWord": "ผู้เฒ่า",
-        "meaning": "Old man"
+        "meaning": "Old man",
+        "endingSound": "T"
     },
     {
         "thai": "ณ",
@@ -168,7 +186,8 @@
         "picture": "picture/picture_naaw_nain.png",
         "consonantClass": "Low",
         "associatedWord": "เณร",
-        "meaning": "Buddhist monk"
+        "meaning": "Buddhist monk",
+        "endingSound": "N"
     },
     {
         "thai": "ด",
@@ -177,7 +196,8 @@
         "picture": "picture/picture_daaw_dek.png",
         "consonantClass": "Mid",
         "associatedWord": "เด็ก",
-        "meaning": "Child"
+        "meaning": "Child",
+        "endingSound": "T"
     },
     {
         "thai": "ต",
@@ -186,7 +206,8 @@
         "picture": "picture/picture_dtaaw_dtao.png",
         "consonantClass": "Mid",
         "associatedWord": "เต่า",
-        "meaning": "Turtle"
+        "meaning": "Turtle",
+        "endingSound": "T"
     },
     {
         "thai": "ถ",
@@ -195,7 +216,8 @@
         "picture": "picture/picture_thaaw_thoong.png",
         "consonantClass": "High",
         "associatedWord": "ถุง",
-        "meaning": "Shopping bag"
+        "meaning": "Shopping bag",
+        "endingSound": "T"
     },
     {
         "thai": "ท",
@@ -204,7 +226,8 @@
         "picture": "picture/picture_thaaw_tha_haan.png",
         "consonantClass": "Low",
         "associatedWord": "ทหาร",
-        "meaning": "Soldier"
+        "meaning": "Soldier",
+        "endingSound": "T"
     },
     {
         "thai": "ธ",
@@ -213,7 +236,8 @@
         "picture": "picture/picture_thaaw_thohng.png",
         "consonantClass": "Low",
         "associatedWord": "ธง",
-        "meaning": "Flag"
+        "meaning": "Flag",
+        "endingSound": "T"
     },
     {
         "thai": "น",
@@ -222,7 +246,8 @@
         "picture": "picture/picture_naaw_nuu.png",
         "consonantClass": "Low",
         "associatedWord": "หนู",
-        "meaning": "Mouse"
+        "meaning": "Mouse",
+        "endingSound": "N"
     },
     {
         "thai": "บ",
@@ -231,7 +256,8 @@
         "picture": "picture/picture_baaw_bai_maai.png",
         "consonantClass": "Mid",
         "associatedWord": "ใบไม้",
-        "meaning": "Leaf"
+        "meaning": "Leaf",
+        "endingSound": "P"
     },
     {
         "thai": "ป",
@@ -240,7 +266,8 @@
         "picture": "picture/picture_bpaaw_bplaa.png",
         "consonantClass": "Mid",
         "associatedWord": "ปลา",
-        "meaning": "Fish"
+        "meaning": "Fish",
+        "endingSound": "P"
     },
     {
         "thai": "ผ",
@@ -249,7 +276,8 @@
         "picture": "picture/picture_phaaw_pheung.png",
         "consonantClass": "High",
         "associatedWord": "ผึ้ง",
-        "meaning": "Bee"
+        "meaning": "Bee",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ฝ",
@@ -258,7 +286,8 @@
         "picture": "picture/picture_faaw_faa.png",
         "consonantClass": "High",
         "associatedWord": "ฝา",
-        "meaning": "Lid"
+        "meaning": "Lid",
+        "endingSound": "Impossible"
     },
     {
         "thai": "พ",
@@ -267,7 +296,8 @@
         "picture": "picture/picture_phaaw_phaan.png",
         "consonantClass": "Low",
         "associatedWord": "พาน",
-        "meaning": "Offering tray"
+        "meaning": "Offering tray",
+        "endingSound": "P"
     },
     {
         "thai": "ฟ",
@@ -276,7 +306,8 @@
         "picture": "picture/picture_faaw_fan.png",
         "consonantClass": "Low",
         "associatedWord": "ฟัน",
-        "meaning": "Tooth"
+        "meaning": "Tooth",
+        "endingSound": "P"
     },
     {
         "thai": "ภ",
@@ -285,7 +316,8 @@
         "picture": "picture/picture_phaaw_sam_phao.png",
         "consonantClass": "Low",
         "associatedWord": "สำเภา",
-        "meaning": "Small Chinese boat"
+        "meaning": "Small Chinese boat",
+        "endingSound": "P"
     },
     {
         "thai": "ม",
@@ -294,7 +326,8 @@
         "picture": "picture/picture_maaw_maa.png",
         "consonantClass": "Low",
         "associatedWord": "ม้า",
-        "meaning": "Horse"
+        "meaning": "Horse",
+        "endingSound": "M"
     },
     {
         "thai": "ย",
@@ -303,7 +336,8 @@
         "picture": "picture/picture_yaaw_yak.png",
         "consonantClass": "Low",
         "associatedWord": "ยักษ์",
-        "meaning": "Demon"
+        "meaning": "Demon",
+        "endingSound": "Y"
     },
     {
         "thai": "ร",
@@ -312,7 +346,8 @@
         "picture": "picture/picture_raaw_reuua.png",
         "consonantClass": "Low",
         "associatedWord": "เรือ",
-        "meaning": "Boat"
+        "meaning": "Boat",
+        "endingSound": "N"
     },
     {
         "thai": "ล",
@@ -321,7 +356,8 @@
         "picture": "picture/picture_laaw_ling.png",
         "consonantClass": "Low",
         "associatedWord": "ลิง",
-        "meaning": "Monkey"
+        "meaning": "Monkey",
+        "endingSound": "N"
     },
     {
         "thai": "ว",
@@ -330,7 +366,8 @@
         "picture": "picture/picture_waaw_waaen.png",
         "consonantClass": "Low",
         "associatedWord": "แหวน",
-        "meaning": "Ring"
+        "meaning": "Ring",
+        "endingSound": "W"
     },
     {
         "thai": "ศ",
@@ -339,7 +376,8 @@
         "picture": "picture/picture_saaw_saa_laa.png",
         "consonantClass": "High",
         "associatedWord": "ศาลา",
-        "meaning": "Gazebo"
+        "meaning": "Gazebo",
+        "endingSound": "T"
     },
     {
         "thai": "ษ",
@@ -348,7 +386,8 @@
         "picture": "picture/picture_saaw_reuu_see.png",
         "consonantClass": "High",
         "associatedWord": "ฤๅษี",
-        "meaning": "Hermit"
+        "meaning": "Hermit",
+        "endingSound": "T"
     },
     {
         "thai": "ส",
@@ -357,7 +396,8 @@
         "picture": "picture/picture_saaw_seuua.png",
         "consonantClass": "High",
         "associatedWord": "เสือ",
-        "meaning": "Tiger"
+        "meaning": "Tiger",
+        "endingSound": "T"
     },
     {
         "thai": "ห",
@@ -366,7 +406,8 @@
         "picture": "picture/picture_haaw_heep.png",
         "consonantClass": "High",
         "associatedWord": "หีบ",
-        "meaning": "Box, Trunk"
+        "meaning": "Box, Trunk",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ฬ",
@@ -375,7 +416,8 @@
         "picture": "picture/picture_laaw_joo_laa.png",
         "consonantClass": "Low",
         "associatedWord": "จุฬา",
-        "meaning": "Kite"
+        "meaning": "Kite",
+        "endingSound": "N"
     },
     {
         "thai": "อ",
@@ -384,7 +426,8 @@
         "picture": "picture/picture_aaaw_aang.png",
         "consonantClass": "Mid",
         "associatedWord": "อ่าง",
-        "meaning": "Tub, Bucket"
+        "meaning": "Tub, Bucket",
+        "endingSound": "Impossible"
     },
     {
         "thai": "ฮ",
@@ -393,6 +436,7 @@
         "picture": "picture/picture_haaw_nohk_huuk.png",
         "consonantClass": "Low",
         "associatedWord": "นกฮูก",
-        "meaning": "Owl"
+        "meaning": "Owl",
+        "endingSound": "Impossible"
     }
 ]

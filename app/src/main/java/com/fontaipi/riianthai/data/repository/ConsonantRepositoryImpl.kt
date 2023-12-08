@@ -1,11 +1,9 @@
 package com.fontaipi.riianthai.data.repository
 
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
-import com.fontaipi.riianthai.data.database.entity.ConsonantCount
 import com.fontaipi.riianthai.data.database.entity.asExternalModel
 import com.fontaipi.riianthai.model.Consonant
 import com.fontaipi.riianthai.model.ConsonantClass
-import com.fontaipi.riianthai.model.asEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
