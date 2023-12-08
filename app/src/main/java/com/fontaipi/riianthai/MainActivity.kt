@@ -2,9 +2,13 @@ package com.fontaipi.riianthai
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
 import com.fontaipi.riianthai.model.Consonant
@@ -31,7 +35,17 @@ class MainActivity : ComponentActivity() {
                 consonantDao.upsertConsonants(consonants.map { it.asEntity() })
             }
         }
+
         setContent {
+            LaunchedEffect(Unit) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        android.graphics.Color.TRANSPARENT,
+                        android.graphics.Color.TRANSPARENT,
+                    )
+                )
+            }
+
             RiianThaiTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
