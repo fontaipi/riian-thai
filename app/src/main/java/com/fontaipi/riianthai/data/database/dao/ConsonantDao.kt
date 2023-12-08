@@ -40,4 +40,7 @@ interface ConsonantDao {
     suspend fun insertOrIgnoreWordCrossRefEntities(
         consonantWordsCrossReferences: List<ConsonantWordsCrossRef>,
     )
+
+    @Query("DELETE FROM consonant_words WHERE word_id = :wordId")
+    suspend fun deleteWordCrossRefEntitiesByWordId(wordId: Long)
 }

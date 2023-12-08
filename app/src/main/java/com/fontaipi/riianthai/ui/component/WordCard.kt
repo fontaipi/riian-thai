@@ -65,7 +65,10 @@ fun WordCard(
                 ) {
                     DropdownMenuItem(
                         text = { Text("Edit") },
-                        onClick = onEdit,
+                        onClick = {
+                            expanded = false
+                            onEdit()
+                        },
                         leadingIcon = {
                             Icon(
                                 Icons.Outlined.Edit,
@@ -75,7 +78,10 @@ fun WordCard(
                     )
                     DropdownMenuItem(
                         text = { Text("Delete") },
-                        onClick = onDelete,
+                        onClick = {
+                            expanded = false
+                            onDelete()
+                        },
                         leadingIcon = {
                             Icon(
                                 Icons.Outlined.Delete,

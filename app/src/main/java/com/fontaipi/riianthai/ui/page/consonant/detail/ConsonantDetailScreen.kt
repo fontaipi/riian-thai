@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.VolumeUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.FilledIconButton
@@ -45,8 +46,11 @@ import coil.compose.AsyncImage
 import com.fontaipi.riianthai.model.Consonant
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.model.EndingSound
+import com.fontaipi.riianthai.model.Word
 import com.fontaipi.riianthai.ui.component.WordCard
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.ConfirmDeleteWordDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.EditWordBottomSheet
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
@@ -64,6 +68,8 @@ fun ConsonantDetailRoute(
     val consonantDetailState by viewModel.consonant.collectAsStateWithLifecycle()
     ConsonantDetailScreen(
         consonantDetailState = consonantDetailState,
+        updateWord = viewModel::updateWord,
+        deleteWord = viewModel::deleteWord,
         onBackClick = onBackClick
     )
 }
@@ -71,12 +77,18 @@ fun ConsonantDetailRoute(
 @Composable
 fun ConsonantDetailScreen(
     consonantDetailState: ConsonantDetailState,
+    updateWord: (Word) -> Unit,
+    deleteWord: (Word) -> Unit,
     onBackClick: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
     var showDiphthongDialog by remember { mutableStateOf(false) }
     var showEndingConsonantDialog by remember { mutableStateOf(false) }
+    var showConfirmDeleteWordDialog by remember { mutableStateOf(false) }
+
+    var showEditWordBottomSheet by remember { mutableStateOf(false) }
+    var selectedWord by remember { mutableStateOf<Word?>(null) }
 
     Surface {
         Column(
@@ -265,7 +277,8 @@ fun ConsonantDetailScreen(
                         }
                         Spacer(modifier = Modifier.height(24.dp))
                         Column(
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
                         ) {
                             Text(
                                 text = "Words with ${consonantDetailState.consonant.thai}",
@@ -280,8 +293,14 @@ fun ConsonantDetailScreen(
                                         modifier = Modifier.fillMaxWidth(),
                                         word = it.thai,
                                         meaning = it.meaning,
-                                        onEdit = { },
-                                        onDelete = { }
+                                        onEdit = {
+                                            selectedWord = it
+                                            showEditWordBottomSheet = true
+                                        },
+                                        onDelete = {
+                                            selectedWord = it
+                                            showConfirmDeleteWordDialog = true
+                                        }
                                     )
                                 }
                             }
@@ -305,6 +324,36 @@ fun ConsonantDetailScreen(
             onDismissRequest = { showEndingConsonantDialog = false }
         )
     }
+
+    if (showEditWordBottomSheet && selectedWord != null) {
+        EditWordBottomSheet(
+            word = selectedWord!!,
+            onConfirm = { thai, meaning ->
+                updateWord(selectedWord!!.copy(thai = thai, meaning = meaning))
+                showEditWordBottomSheet = false
+                selectedWord = null
+            },
+            onDismissRequest = {
+                showEditWordBottomSheet = false
+                selectedWord = null
+            }
+        )
+    }
+
+    if (showConfirmDeleteWordDialog && selectedWord != null) {
+        ConfirmDeleteWordDialog(
+            onConfirmRequest = {
+                deleteWord(selectedWord!!)
+                showConfirmDeleteWordDialog = false
+                selectedWord = null
+            },
+            onDismissRequest = {
+                showConfirmDeleteWordDialog = false
+                selectedWord = null
+            }
+        )
+    }
+
 }
 
 @Preview
@@ -325,6 +374,8 @@ private fun ConsonantDetailScreenPreview() {
                     audio = "consonants/ก.mp3"
                 )
             ),
+            updateWord = {},
+            deleteWord = {},
             onBackClick = {}
         )
     }

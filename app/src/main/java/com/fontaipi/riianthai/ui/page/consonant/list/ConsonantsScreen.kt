@@ -11,13 +11,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
@@ -40,6 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.model.EndingClass
+import com.fontaipi.riianthai.model.EndingSound
 import com.fontaipi.riianthai.ui.page.summary.component.ConsonantCard
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
@@ -66,6 +73,7 @@ fun ConsonantsScreen(
 ) {
     var selectedClass by remember { mutableStateOf<ConsonantClass?>(null) }
     var selectedEndingClass by remember { mutableStateOf<EndingClass?>(null) }
+    var selectedEndingSound by remember { mutableStateOf<EndingSound?>(null) }
 
     Column(
         modifier = Modifier
@@ -118,14 +126,13 @@ fun ConsonantsScreen(
                         if (it == selectedEndingClass) {
                             Icon(
                                 imageVector = Icons.Rounded.Check,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp)
+                                contentDescription = null
                             )
                         }
                     },
                     colors = FilterChipDefaults.filterChipColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
-                        selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant
+                        selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                     ),
                     selected = it == selectedEndingClass,
                     onClick = {
@@ -137,6 +144,57 @@ fun ConsonantsScreen(
                     },
                     label = { Text(text = it.name) }
                 )
+            }
+
+            var expanded by remember { mutableStateOf(false) }
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = { expanded = it },
+            ) {
+                FilterChip(
+                    modifier = Modifier.menuAnchor(),
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowDropDown,
+                            contentDescription = null,
+                        )
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+                        selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        iconColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                    selected = selectedEndingSound != null,
+                    onClick = {
+                        expanded = true
+                    },
+                    label = {
+                        Text(text = selectedEndingSound?.name ?: "Ending sound")
+                    }
+                )
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("") },
+                        onClick = {
+                            selectedEndingSound = null
+                            expanded = false
+                        },
+                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                    )
+                    EndingSound.entries.filterNot { it == EndingSound.Impossible }.forEach {
+                        DropdownMenuItem(
+                            text = { Text(it.name) },
+                            onClick = {
+                                selectedEndingSound = it
+                                expanded = false
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                        )
+                    }
+                }
             }
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -155,6 +213,12 @@ fun ConsonantsScreen(
                                 true
                             } else {
                                 it.endingSound.endingClass == selectedEndingClass
+                            }
+                        }.filter {
+                            if (selectedEndingSound == null) {
+                                true
+                            } else {
+                                it.endingSound == selectedEndingSound
                             }
                         }
                     }
