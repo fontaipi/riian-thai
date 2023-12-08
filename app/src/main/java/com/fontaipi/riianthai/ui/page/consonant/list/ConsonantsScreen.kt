@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fontaipi.riianthai.model.ConsonantClass
+import com.fontaipi.riianthai.model.EndingClass
 import com.fontaipi.riianthai.ui.page.summary.component.ConsonantCard
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
@@ -63,7 +64,8 @@ fun ConsonantsScreen(
     navigateToConsonantDetail: (Long) -> Unit,
     consonantsState: ConsonantsState
 ) {
-    var selectedClass by remember { mutableStateOf(ConsonantClass.All) }
+    var selectedClass by remember { mutableStateOf<ConsonantClass?>(null) }
+    var selectedEndingClass by remember { mutableStateOf<EndingClass?>(null) }
 
     Column(
         modifier = Modifier
@@ -80,7 +82,6 @@ fun ConsonantsScreen(
                     ConsonantClass.Low -> LowClassColor
                     ConsonantClass.Mid -> MiddleClassColor
                     ConsonantClass.High -> HighClassColor
-                    ConsonantClass.All -> MaterialTheme.colorScheme.surfaceVariant
                 }
                 FilterChip(
                     leadingIcon = {
@@ -97,7 +98,43 @@ fun ConsonantsScreen(
                         selectedContainerColor = color
                     ),
                     selected = it == selectedClass,
-                    onClick = { selectedClass = it },
+                    onClick = {
+                        selectedClass = if (it == selectedClass) {
+                            null
+                        } else {
+                            it
+                        }
+                    },
+                    label = { Text(text = it.name) }
+                )
+            }
+        }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            EndingClass.entries.filterNot { it == EndingClass.None }.forEach {
+                FilterChip(
+                    leadingIcon = {
+                        if (it == selectedEndingClass) {
+                            Icon(
+                                imageVector = Icons.Rounded.Check,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+                        selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    selected = it == selectedEndingClass,
+                    onClick = {
+                        selectedEndingClass = if (it == selectedEndingClass) {
+                            null
+                        } else {
+                            it
+                        }
+                    },
                     label = { Text(text = it.name) }
                 )
             }
@@ -108,10 +145,16 @@ fun ConsonantsScreen(
                 val filteredConsonants by remember {
                     derivedStateOf {
                         consonantsState.consonants.filter {
-                            if (selectedClass == ConsonantClass.All) {
+                            if (selectedClass == null) {
                                 true
                             } else {
                                 it.consonantClass == selectedClass
+                            }
+                        }.filter {
+                            if (selectedEndingClass == null) {
+                                true
+                            } else {
+                                it.endingSound.endingClass == selectedEndingClass
                             }
                         }
                     }
@@ -129,7 +172,6 @@ fun ConsonantsScreen(
                             ConsonantClass.Low -> LowClassColor
                             ConsonantClass.Mid -> MiddleClassColor
                             ConsonantClass.High -> HighClassColor
-                            ConsonantClass.All -> MaterialTheme.colorScheme.surfaceVariant
                         }
                         ConsonantCard(
                             modifier = Modifier.aspectRatio(1f),

@@ -13,8 +13,8 @@ import javax.inject.Inject
 class ConsonantRepositoryImpl @Inject constructor(
     private val consonantDao: ConsonantDao
 ) : ConsonantRepository {
-    override fun getConsonants(filter: ConsonantClass): Flow<List<Consonant>> {
-        return if (filter == ConsonantClass.All) {
+    override fun getConsonants(filter: ConsonantClass?): Flow<List<Consonant>> {
+        return if (filter == null) {
             consonantDao.getConsonants()
                 .map { it.map { consonant -> consonant.asExternalModel() } }
         } else {

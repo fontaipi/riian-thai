@@ -109,7 +109,6 @@ fun ConsonantDetailScreen(
                                 ConsonantClass.Low -> LowClassColor
                                 ConsonantClass.Mid -> MiddleClassColor
                                 ConsonantClass.High -> HighClassColor
-                                ConsonantClass.All -> MaterialTheme.colorScheme.surfaceVariant
                             }
                             Tag(
                                 text = consonantDetailState.consonant.consonantClass.name,

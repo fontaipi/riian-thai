@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
 enum class ConsonantClass {
     Low,
     Mid,
-    High,
-    All
+    High
 }
 
 enum class EndingSound(val endingClass: EndingClass, val phonetic: String) {

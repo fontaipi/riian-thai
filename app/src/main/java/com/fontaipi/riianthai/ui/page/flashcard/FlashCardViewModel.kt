@@ -1,6 +1,5 @@
 package com.fontaipi.riianthai.ui.page.flashcard
 
-import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,17 +9,15 @@ import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.ui.page.flashcard.component.CardFace
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class FlashCardItemArgs(val consonantClass: ConsonantClass) {
+internal class FlashCardItemArgs(val consonantClass: ConsonantClass?) {
     constructor(savedStateHandle: SavedStateHandle) :
-            this(savedStateHandle["consonantClass"] ?: ConsonantClass.All)
+            this(savedStateHandle["consonantClass"])
 }
 
 data class FlashCardState(
