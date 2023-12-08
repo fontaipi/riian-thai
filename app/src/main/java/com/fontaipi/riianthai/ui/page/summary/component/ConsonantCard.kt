@@ -23,7 +23,7 @@ import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 fun ConsonantCard(
     modifier: Modifier = Modifier,
     consonant: String,
-    backgroundColor: Color,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     onClick: () -> Unit
 ) {
     Card(

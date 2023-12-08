@@ -16,6 +16,9 @@ interface ConsonantDao {
     @Query("SELECT * FROM consonant WHERE consonant_class = :filter")
     fun getConsonants(filter: String): Flow<List<ConsonantEntity>>
 
+    @Query("SELECT * FROM consonant WHERE id = :id")
+    fun getConsonantById(id: Long): Flow<ConsonantEntity>
+
     @Query("SELECT COUNT(*) FROM consonant")
     suspend fun countConsonants(): Int
 

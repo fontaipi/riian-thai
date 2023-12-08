@@ -25,6 +25,11 @@ class ConsonantRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getConsonantById(id: Long): Flow<Consonant> {
+        return consonantDao.getConsonantById(id)
+            .map { it.asExternalModel() }
+    }
+
     override suspend fun incrementCount(id: Long) = withContext(Dispatchers.IO) {
         consonantDao.incrementCount(id)
     }

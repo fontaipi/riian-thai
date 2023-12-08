@@ -1,12 +1,11 @@
 package com.fontaipi.riianthai
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -23,14 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -38,14 +33,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navOptions
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.ui.component.BottomAppBar
 import com.fontaipi.riianthai.ui.component.slideInVerticallyComposable
 import com.fontaipi.riianthai.ui.page.cards.CardsScreen
 import com.fontaipi.riianthai.ui.page.flashcard.FlashCardScreen
+import com.fontaipi.riianthai.ui.page.consonant.detail.ConsonantDetailRoute
+import com.fontaipi.riianthai.ui.page.consonant.list.ConsonantsRoute
 import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
 import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
-import com.fontaipi.riianthai.ui.page.words.WordsScreen
+import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
+import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
+import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
 
 @Immutable
 data class TopAppBarState(
@@ -56,28 +56,41 @@ data class TopAppBarState(
 
 @Immutable
 data class ScaffoldViewState(
-    val topAppBarState: TopAppBarState? = null,
+    val topAppBarState: TopAppBarState = TopAppBarState(),
     val onFabClick: (() -> Unit)? = null,
     val fabIcon: ImageVector? = null,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RiianThaiApp() {
+fun RiianThaiApp(
+    appState: RiianThaiState = rememberRiianThaiAppState(),
+) {
     var scaffoldViewState by remember { mutableStateOf(ScaffoldViewState()) }
-    val navController = rememberNavController()
-    val mainBottomNavController = rememberNavController()
-    NavHost(navController = navController, startDestination = "mainNav") {
+    NavHost(navController = appState.navController, startDestination = "mainNav") {
         composable("mainNav") {
             Scaffold(
                 topBar = {
-                    scaffoldViewState.topAppBarState?.let {
-                        CenterAlignedTopAppBar(
-                            title = it.title,
-                            navigationIcon = it.navigationIcon,
-                            actions = it.actions,
-                        )
-                    }
+                    CenterAlignedTopAppBar(
+                        title = scaffoldViewState.topAppBarState.title,
+                        navigationIcon = {
+                            if (appState.currentTopLevelDestination == null) {
+                                IconButton(
+                                    onClick = {
+                                        appState.bottomNavController.popBackStack()
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Filled.ArrowBack,
+                                        contentDescription = "backArrow",
+                                    )
+                                }
+                            } else {
+                                scaffoldViewState.topAppBarState.navigationIcon()
+                            }
+                        },
+                        actions = scaffoldViewState.topAppBarState.actions,
+                    )
                 },
                 floatingActionButton = {
                     scaffoldViewState.onFabClick?.let { action ->
@@ -93,11 +106,8 @@ fun RiianThaiApp() {
                 bottomBar = {
                     BottomAppBar(
                         destinations = TopLevelDestination.entries,
-                        onNavigateToDestination = { destination ->
-                            mainBottomNavController.navigate(destination.name)
-                        },
-                        currentDestination = mainBottomNavController
-                            .currentBackStackEntryAsState().value?.destination,
+                        onNavigateToDestination = appState::navigateToTopLevelDestination,
+                        currentDestination = appState.currentBottomNavDestination,
                     )
                 }
             ) { paddingValues ->
@@ -106,14 +116,17 @@ fun RiianThaiApp() {
                         .fillMaxSize()
                         .padding(paddingValues),
                 ) {
-                    MainBottomNav(
-                        navController = mainBottomNavController,
+                    BottomNavHost(
+                        navController = appState.bottomNavController,
                         updateScaffoldViewState = { scaffoldViewState = it },
                         navigateToFlashCardScreen = {
-                            navController.navigate("flashcard/${it}")
                         },
                         navigateToSummaryScreen = {
-                            navController.navigate("summary")
+                        },
+                        navigateToConsonants = {
+                        },
+                        navigateToConsonantDetail = {
+                            appState.navController.navigate("consonants/${it}")
                         }
                     )
                 }
@@ -130,7 +143,7 @@ fun RiianThaiApp() {
         ) {
             FlashCardScreen(
                 onBackClick = {
-                    navController.popBackStack()
+                    appState.bottomNavController.popBackStack()
                 }
             )
         }
@@ -138,7 +151,21 @@ fun RiianThaiApp() {
         slideInVerticallyComposable("summary") {
             SummaryScreen(
                 onBackClick = {
-                    navController.popBackStack()
+                    appState.bottomNavController.popBackStack()
+                }
+            )
+        }
+
+        slideInVerticallyComposable(
+            route = "consonants/{consonantId}", arguments = listOf(
+                navArgument("consonantId") {
+                    type = NavType.LongType
+                }
+            )
+        ) {
+            ConsonantDetailRoute(
+                onBackClick = {
+                    appState.navController.popBackStack()
                 }
             )
         }
@@ -146,19 +173,21 @@ fun RiianThaiApp() {
 }
 
 @Composable
-fun MainBottomNav(
+fun BottomNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     updateScaffoldViewState: (ScaffoldViewState) -> Unit,
     navigateToFlashCardScreen: (ConsonantClass) -> Unit,
     navigateToSummaryScreen: () -> Unit,
+    navigateToConsonants: () -> Unit,
+    navigateToConsonantDetail: (Long) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.CARDS.name
+        startDestination = TopLevelDestination.CARDS.path
     ) {
-        composable(TopLevelDestination.CARDS.name) {
+        composable(TopLevelDestination.CARDS.path) {
             LaunchedEffect(Unit) {
                 updateScaffoldViewState(
                     ScaffoldViewState(
@@ -175,43 +204,19 @@ fun MainBottomNav(
             )
         }
 
-        composable(TopLevelDestination.WORDS.name) {
-            LaunchedEffect(Unit) {
-                updateScaffoldViewState(
-                    ScaffoldViewState(
-                        topAppBarState = TopAppBarState(
-                            title = {
-                                Text(
-                                    text = buildAnnotatedString {
-                                        withStyle(
-                                            style = SpanStyle(
-                                                color = Color(0xFFE91E63)
-                                            )
-                                        ) {
-                                            append("RiianThai")
-                                        }
-                                        append(" \uD83C\uDDF9\uD83C\uDDED")
-                                    },
-                                    style = MaterialTheme.typography.displaySmall
-                                )
-                            },
-                            actions = {
-                                IconButton(onClick = { }) {
-                                    Icon(
-                                        imageVector = Icons.Rounded.Search,
-                                        contentDescription = null,
-                                    )
-                                }
-                            }
-                        ),
-                        onFabClick = { }
-                    )
+        learnGraph(
+            navigateToConsonants = {
+                navController.navigate("consonants")
+            }
+        ) {
+            composable("consonants") {
+                ConsonantsRoute(
+                    navigateToConsonantDetail = navigateToConsonantDetail
                 )
             }
-            WordsScreen()
         }
 
-        composable(TopLevelDestination.SETTINGS.name) {
+        composable(TopLevelDestination.SETTINGS.path) {
             LaunchedEffect(Unit) {
                 updateScaffoldViewState(
                     ScaffoldViewState(
@@ -224,5 +229,48 @@ fun MainBottomNav(
             }
             SettingsScreen()
         }
+    }
+}
+
+@Composable
+fun rememberRiianThaiAppState(
+    navController: NavHostController = rememberNavController(),
+    bottomNavController: NavHostController = rememberNavController(),
+): RiianThaiState {
+    return remember(navController) {
+        RiianThaiState(navController, bottomNavController)
+    }
+}
+
+class RiianThaiState(
+    val navController: NavHostController,
+    val bottomNavController: NavHostController,
+) {
+    val currentBottomNavDestination: NavDestination?
+        @Composable get() = bottomNavController
+            .currentBackStackEntryAsState().value?.destination
+
+    val currentTopLevelDestination: TopLevelDestination?
+        @Composable get() = when (currentBottomNavDestination?.route) {
+            TopLevelDestination.CARDS.path -> TopLevelDestination.CARDS
+            learnRoute -> TopLevelDestination.LEARN
+            TopLevelDestination.SETTINGS.path -> TopLevelDestination.SETTINGS
+            else -> null
+        }
+
+    fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
+        val topLevelNavOptions = navOptions {
+            popUpTo(bottomNavController.graph.findStartDestination().id) {
+                saveState = false
+            }
+            launchSingleTop = true
+        }
+
+        when (topLevelDestination) {
+            TopLevelDestination.LEARN -> bottomNavController.navigateToLearnGraph(topLevelNavOptions)
+            TopLevelDestination.CARDS -> bottomNavController.navigate(TopLevelDestination.CARDS.path)
+            TopLevelDestination.SETTINGS -> bottomNavController.navigate(TopLevelDestination.SETTINGS.path)
+        }
+
     }
 }
