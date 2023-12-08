@@ -16,12 +16,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.VolumeUp
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -50,7 +50,7 @@ import com.fontaipi.riianthai.model.Word
 import com.fontaipi.riianthai.ui.component.WordCard
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.ConfirmDeleteWordDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
-import com.fontaipi.riianthai.ui.page.consonant.detail.component.EditWordBottomSheet
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.UpsertWordBottomSheet
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
@@ -68,6 +68,7 @@ fun ConsonantDetailRoute(
     val consonantDetailState by viewModel.consonant.collectAsStateWithLifecycle()
     ConsonantDetailScreen(
         consonantDetailState = consonantDetailState,
+        insertWord = viewModel::insertWord,
         updateWord = viewModel::updateWord,
         deleteWord = viewModel::deleteWord,
         onBackClick = onBackClick
@@ -77,6 +78,7 @@ fun ConsonantDetailRoute(
 @Composable
 fun ConsonantDetailScreen(
     consonantDetailState: ConsonantDetailState,
+    insertWord: (Word, Long) -> Unit,
     updateWord: (Word) -> Unit,
     deleteWord: (Word) -> Unit,
     onBackClick: () -> Unit,
@@ -213,7 +215,7 @@ fun ConsonantDetailScreen(
                                     )
                                 }
                             }
-                            Divider()
+                            HorizontalDivider()
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -280,10 +282,24 @@ fun ConsonantDetailScreen(
                             modifier = Modifier.fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(4.dp),
                         ) {
-                            Text(
-                                text = "Words with ${consonantDetailState.consonant.thai}",
-                                style = MaterialTheme.typography.titleLarge
-                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Words with ${consonantDetailState.consonant.thai}",
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                                FilledIconButton(
+                                    onClick = {
+                                        showEditWordBottomSheet = true
+                                    }
+                                ) {
+                                    Icon(imageVector = Icons.Rounded.Add, contentDescription = null)
+                                }
+                            }
+
 
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -306,52 +322,58 @@ fun ConsonantDetailScreen(
                             }
                         }
                     }
+                    if (showDiphthongDialog) {
+                        DiphthongDialog(
+                            onDismissRequest = { showDiphthongDialog = false }
+                        )
+                    }
+
+                    if (showEndingConsonantDialog) {
+                        EndingConsonantDialog(
+                            onDismissRequest = { showEndingConsonantDialog = false }
+                        )
+                    }
+
+                    if (showEditWordBottomSheet) {
+                        UpsertWordBottomSheet(
+                            word = selectedWord,
+                            onConfirm = { thai, meaning ->
+                                if (selectedWord == null) {
+                                    insertWord(
+                                        Word(thai = thai, meaning = meaning),
+                                        consonantDetailState.consonant.id
+                                    )
+                                } else {
+                                    updateWord(selectedWord!!)
+                                }
+                                showEditWordBottomSheet = false
+                                selectedWord = null
+                            },
+                            onDismissRequest = {
+                                showEditWordBottomSheet = false
+                                selectedWord = null
+                            }
+                        )
+                    }
+
+                    if (showConfirmDeleteWordDialog && selectedWord != null) {
+                        ConfirmDeleteWordDialog(
+                            onConfirmRequest = {
+                                deleteWord(selectedWord!!)
+                                showConfirmDeleteWordDialog = false
+                                selectedWord = null
+                            },
+                            onDismissRequest = {
+                                showConfirmDeleteWordDialog = false
+                                selectedWord = null
+                            }
+                        )
+                    }
                 }
 
                 ConsonantDetailState.Loading -> CircularProgressIndicator()
             }
         }
-    }
-
-    if (showDiphthongDialog) {
-        DiphthongDialog(
-            onDismissRequest = { showDiphthongDialog = false }
-        )
-    }
-
-    if (showEndingConsonantDialog) {
-        EndingConsonantDialog(
-            onDismissRequest = { showEndingConsonantDialog = false }
-        )
-    }
-
-    if (showEditWordBottomSheet && selectedWord != null) {
-        EditWordBottomSheet(
-            word = selectedWord!!,
-            onConfirm = { thai, meaning ->
-                updateWord(selectedWord!!.copy(thai = thai, meaning = meaning))
-                showEditWordBottomSheet = false
-                selectedWord = null
-            },
-            onDismissRequest = {
-                showEditWordBottomSheet = false
-                selectedWord = null
-            }
-        )
-    }
-
-    if (showConfirmDeleteWordDialog && selectedWord != null) {
-        ConfirmDeleteWordDialog(
-            onConfirmRequest = {
-                deleteWord(selectedWord!!)
-                showConfirmDeleteWordDialog = false
-                selectedWord = null
-            },
-            onDismissRequest = {
-                showConfirmDeleteWordDialog = false
-                selectedWord = null
-            }
-        )
     }
 
 }
@@ -374,6 +396,7 @@ private fun ConsonantDetailScreenPreview() {
                     audio = "consonants/ก.mp3"
                 )
             ),
+            insertWord = { _, _ -> },
             updateWord = {},
             deleteWord = {},
             onBackClick = {}

@@ -27,16 +27,16 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditWordBottomSheet(
-    word: Word,
+fun UpsertWordBottomSheet(
+    word: Word?,
     onDismissRequest: () -> Unit,
     onConfirm: (String, String) -> Unit
 ) {
     val bottomSheetState = rememberModalBottomSheetState()
     val coroutineScope = rememberCoroutineScope()
 
-    var wordThai by remember { mutableStateOf(word.thai) }
-    var wordMeaning by remember { mutableStateOf(word.meaning) }
+    var wordThai by remember { mutableStateOf(word?.thai ?: "") }
+    var wordMeaning by remember { mutableStateOf(word?.meaning ?: "") }
 
     ModalBottomSheet(
         sheetState = bottomSheetState,
@@ -50,7 +50,7 @@ fun EditWordBottomSheet(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Edit Word",
+                text = "${if (word == null) "Add" else "Edit"} word",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )

@@ -40,9 +40,15 @@ class ConsonantDetailViewModel @Inject constructor(
         initialValue = ConsonantDetailState.Loading
     )
 
+    fun insertWord(word: Word, consonantId: Long) {
+        viewModelScope.launch {
+            wordRepository.insertWordForConsonant(word, consonantId)
+        }
+    }
+
     fun updateWord(word: Word) {
         viewModelScope.launch {
-            wordRepository.upsertWord(word)
+            wordRepository.updateWord(word)
         }
     }
 
