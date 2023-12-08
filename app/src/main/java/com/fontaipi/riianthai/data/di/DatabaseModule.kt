@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.fontaipi.riianthai.data.database.RiianThaiDatabase
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
+import com.fontaipi.riianthai.data.database.dao.WordDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,4 +30,9 @@ class DatabaseModule {
     fun providesConsonantDao(
         database: RiianThaiDatabase,
     ): ConsonantDao = database.consonantDao()
+
+    @Provides
+    fun providesWordDao(
+        database: RiianThaiDatabase,
+    ): WordDao = database.wordDao()
 }

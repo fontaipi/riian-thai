@@ -24,17 +24,3 @@ data class ConsonantEntity(
     val meaning: String,
     val count: Int,
 )
-
-fun ConsonantEntity.asExternalModel(): Consonant =
-    Consonant(
-        id = id,
-        thai = thai,
-        phonetic = phonetic,
-        audio = audio,
-        picture = picture,
-        consonantClass = consonantClass,
-        endingSound = endingSound,
-        associatedWord = associatedWord,
-        meaning = meaning,
-        count = count
-    )

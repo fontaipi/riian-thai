@@ -32,20 +32,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WordCard(
     modifier: Modifier = Modifier,
     word: String,
     meaning: String,
-    onClick: () -> Unit,
     onDelete: () -> Unit,
     onEdit: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     Card(
         modifier = modifier.width(IntrinsicSize.Max),
-        onClick = onClick,
     ) {
         Row(
             modifier = modifier
@@ -103,7 +100,6 @@ private fun WordCardPreview() {
             modifier = Modifier.fillMaxWidth(),
             word = "สวัสดี",
             meaning = "Hello",
-            onClick = {},
             onDelete = {},
             onEdit = {}
         )

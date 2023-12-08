@@ -38,6 +38,7 @@ data class Consonant(
     val endingSound: EndingSound,
     val associatedWord: String,
     val meaning: String,
+    val exampleWords: List<Word> = emptyList(),
     val count: Int = 0,
 )
 

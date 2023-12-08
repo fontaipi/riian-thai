@@ -11,6 +11,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
+import com.fontaipi.riianthai.data.database.dao.WordDao
+import com.fontaipi.riianthai.data.database.entity.ConsonantWordsCrossRef
 import com.fontaipi.riianthai.model.Consonant
 import com.fontaipi.riianthai.model.asEntity
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
@@ -26,13 +28,29 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var consonantDao: ConsonantDao
 
+    @Inject
+    lateinit var wordDao: WordDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val jsonString = assets.open("consonants.json").readBytes().decodeToString()
+            val jsonString = assets.open("consonants_updated.json").readBytes().decodeToString()
             val consonants = Json.decodeFromString<List<Consonant>>(jsonString)
             if (consonantDao.countConsonants() == 0) {
                 consonantDao.upsertConsonants(consonants.map { it.asEntity() })
+            }
+            if (wordDao.countWords() == 0) {
+                wordDao.upsertWords(consonants.flatMap { it.exampleWords }.map { it.asEntity() })
+                consonantDao.insertOrIgnoreWordCrossRefEntities(
+                    consonants.flatMap { consonant ->
+                        consonant.exampleWords.map { word ->
+                            ConsonantWordsCrossRef(
+                                consonantId = consonant.id,
+                                wordId = word.id
+                            )
+                        }
+                    }
+                )
             }
         }
 

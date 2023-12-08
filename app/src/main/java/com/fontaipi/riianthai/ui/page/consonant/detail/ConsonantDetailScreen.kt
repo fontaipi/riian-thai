@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -80,6 +82,8 @@ fun ConsonantDetailScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .statusBarsPadding()
+                .navigationBarsPadding()
                 .padding(horizontal = 16.dp)
                 .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -181,7 +185,8 @@ fun ConsonantDetailScreen(
                                 }
                                 Column(
                                     modifier = Modifier.weight(2 / 5f),
-                                    horizontalAlignment = Alignment.CenterHorizontally
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
                                     if (consonantDetailState.consonant.picture.isNotEmpty()) {
                                         AsyncImage(
@@ -270,15 +275,14 @@ fun ConsonantDetailScreen(
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(12.dp),
                             ) {
-                                repeat(20) {
+                                consonantDetailState.consonant.exampleWords.forEach {
                                     WordCard(
                                         modifier = Modifier.fillMaxWidth(),
-                                        word = "สวัสดี",
-                                        meaning = "Hello",
-                                        onClick = { },
-                                        onDelete = { }) {
-
-                                    }
+                                        word = it.thai,
+                                        meaning = it.meaning,
+                                        onEdit = { },
+                                        onDelete = { }
+                                    )
                                 }
                             }
                         }
