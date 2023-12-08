@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
@@ -34,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val jsonString = assets.open("consonants_updated.json").readBytes().decodeToString()
+            val jsonString = assets.open("consonants.json").readBytes().decodeToString()
             val consonants = Json.decodeFromString<List<Consonant>>(jsonString)
             if (consonantDao.countConsonants() == 0) {
                 consonantDao.upsertConsonants(consonants.map { it.asEntity() })
