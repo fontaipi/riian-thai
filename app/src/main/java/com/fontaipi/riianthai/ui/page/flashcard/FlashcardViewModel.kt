@@ -20,25 +20,25 @@ internal class FlashCardItemArgs(val consonantClass: ConsonantClass?) {
             this(savedStateHandle["consonantClass"])
 }
 
-data class FlashCardState(
+data class FlashcardState(
     val consonants: List<Consonant> = listOf(),
     val selectedIndex: Int = 0,
     val cardFace: CardFace = CardFace.Front
 )
 
 @HiltViewModel
-class FlashCardViewModel @Inject constructor(
+class FlashcardViewModel @Inject constructor(
     private val consonantRepository: ConsonantRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val flashCardItemArgs = FlashCardItemArgs(savedStateHandle)
 
-    private val _flashCardState = MutableStateFlow(FlashCardState())
-    val flashCardState = _flashCardState.asStateFlow()
+    private val _flashcardState = MutableStateFlow(FlashcardState())
+    val flashCardState = _flashcardState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _flashCardState.update {
+            _flashcardState.update {
                 it.copy(
                     consonants = consonantRepository.getConsonants(flashCardItemArgs.consonantClass)
                         .first()
@@ -48,7 +48,7 @@ class FlashCardViewModel @Inject constructor(
     }
 
     fun shuffle() {
-        _flashCardState.update {
+        _flashcardState.update {
             it.copy(
                 consonants = it.consonants.shuffled(),
                 selectedIndex = 0,
@@ -58,11 +58,11 @@ class FlashCardViewModel @Inject constructor(
     }
 
     fun restart() {
-        _flashCardState.update { it.copy(selectedIndex = 0, cardFace = CardFace.Front) }
+        _flashcardState.update { it.copy(selectedIndex = 0, cardFace = CardFace.Front) }
     }
 
     fun turnCard() {
-        _flashCardState.update { it.copy(cardFace = it.cardFace.next()) }
+        _flashcardState.update { it.copy(cardFace = it.cardFace.next()) }
     }
 
     fun nextCard(id: Long, success: Boolean) {
@@ -71,8 +71,8 @@ class FlashCardViewModel @Inject constructor(
                 consonantRepository.incrementCount(id)
             }
         }
-        if (_flashCardState.value.selectedIndex < _flashCardState.value.consonants.size - 1) {
-            _flashCardState.update {
+        if (_flashcardState.value.selectedIndex < _flashcardState.value.consonants.size - 1) {
+            _flashcardState.update {
                 it.copy(
                     selectedIndex = it.selectedIndex + 1,
                     cardFace = CardFace.Front

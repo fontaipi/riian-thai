@@ -1,17 +1,15 @@
 package com.fontaipi.riianthai.ui.page.learn
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.fontaipi.riianthai.ui.page.learn.component.LearningCategoryCard
 
 @Composable
 fun LearnScreen(
@@ -20,49 +18,39 @@ fun LearnScreen(
     navigateToToneMarks: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             text = "Learn",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.headlineMedium
         )
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Card(
-                onClick = navigateToConsonants
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                ) {
-                    Text(text = "Consonants")
-                }
-            }
-            Card(
-                onClick = {}
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                ) {
-                    Text(text = "Vowels")
-                }
-            }
-            Card(
-                onClick = navigateToToneMarks
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                ) {
-                    Text(text = "Tone marks")
-                }
-            }
+            LearningCategoryCard(
+                title = "Consonants",
+                subtitle = "Learn the consonants of the Thai alphabet",
+                onClick = navigateToConsonants,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                circleColor = MaterialTheme.colorScheme.primary
+            )
+            LearningCategoryCard(
+                title = "Vowels",
+                subtitle = "Learn the vowels of the Thai alphabet",
+                onClick = {},
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                circleColor = MaterialTheme.colorScheme.secondary
+            )
+            LearningCategoryCard(
+                title = "Tone marks",
+                subtitle = "Learn the tone marks of the Thai alphabet",
+                onClick = navigateToToneMarks,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                circleColor = MaterialTheme.colorScheme.tertiary
+            )
         }
     }
 }

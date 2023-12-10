@@ -1,12 +1,12 @@
 package com.fontaipi.riianthai
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Interests
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Style
+import androidx.compose.material.icons.rounded.Interests
 import androidx.compose.material.icons.rounded.School
 import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material.icons.rounded.Style
 import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class TopLevelDestination(
@@ -16,12 +16,12 @@ enum class TopLevelDestination(
     val titleText: String,
     val path: String
 ) {
-    CARDS(
-        selectedIcon = Icons.Rounded.Style,
-        unselectedIcon = Icons.Outlined.Style,
-        iconText = "Flashcards",
-        titleText = "Flashcards",
-        path = "/flashcards"
+    PRACTICE(
+        selectedIcon = Icons.Rounded.Interests,
+        unselectedIcon = Icons.Outlined.Interests,
+        iconText = "Practice",
+        titleText = "Practice",
+        path = "/practice"
     ),
     LEARN(
         selectedIcon = Icons.Rounded.School,

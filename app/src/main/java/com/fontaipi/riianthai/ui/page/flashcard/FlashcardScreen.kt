@@ -20,8 +20,8 @@ import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
 import kotlinx.coroutines.launch
 
 @Composable
-fun FlashCardScreen(
-    viewModel: FlashCardViewModel = hiltViewModel(),
+fun FlashcardScreen(
+    viewModel: FlashcardViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
 ) {
     val flashCardState by viewModel.flashCardState.collectAsStateWithLifecycle()

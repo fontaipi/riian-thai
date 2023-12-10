@@ -37,15 +37,15 @@ import androidx.navigation.navOptions
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.ui.component.BottomAppBar
 import com.fontaipi.riianthai.ui.component.slideInVerticallyComposable
-import com.fontaipi.riianthai.ui.page.cards.CardsScreen
-import com.fontaipi.riianthai.ui.page.flashcard.FlashCardScreen
 import com.fontaipi.riianthai.ui.page.consonant.detail.ConsonantDetailRoute
 import com.fontaipi.riianthai.ui.page.consonant.list.ConsonantsRoute
-import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
-import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
+import com.fontaipi.riianthai.ui.page.flashcard.FlashcardScreen
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
 import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
+import com.fontaipi.riianthai.ui.page.practice.PracticeScreen
+import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
+import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
 import com.fontaipi.riianthai.ui.page.tone.ToneMarksScreen
 
 @Immutable
@@ -142,7 +142,7 @@ fun RiianThaiApp(
 
             )
         ) {
-            FlashCardScreen(
+            FlashcardScreen(
                 onBackClick = {
                     appState.bottomNavController.popBackStack()
                 }
@@ -186,9 +186,9 @@ fun BottomNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.CARDS.path
+        startDestination = TopLevelDestination.PRACTICE.path
     ) {
-        composable(TopLevelDestination.CARDS.path) {
+        composable(TopLevelDestination.PRACTICE.path) {
             LaunchedEffect(Unit) {
                 updateScaffoldViewState(
                     ScaffoldViewState(
@@ -199,10 +199,7 @@ fun BottomNavHost(
                     )
                 )
             }
-            CardsScreen(
-                navigateToFlashCardScreen = navigateToFlashCardScreen,
-                navigateToSummaryScreen = navigateToSummaryScreen
-            )
+            PracticeScreen()
         }
 
         learnGraph(
@@ -259,7 +256,7 @@ class RiianThaiState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentBottomNavDestination?.route) {
-            TopLevelDestination.CARDS.path -> TopLevelDestination.CARDS
+            TopLevelDestination.PRACTICE.path -> TopLevelDestination.PRACTICE
             learnRoute -> TopLevelDestination.LEARN
             TopLevelDestination.SETTINGS.path -> TopLevelDestination.SETTINGS
             else -> null
@@ -275,7 +272,7 @@ class RiianThaiState(
 
         when (topLevelDestination) {
             TopLevelDestination.LEARN -> bottomNavController.navigateToLearnGraph(topLevelNavOptions)
-            TopLevelDestination.CARDS -> bottomNavController.navigate(TopLevelDestination.CARDS.path)
+            TopLevelDestination.PRACTICE -> bottomNavController.navigate(TopLevelDestination.PRACTICE.path)
             TopLevelDestination.SETTINGS -> bottomNavController.navigate(TopLevelDestination.SETTINGS.path)
         }
 
