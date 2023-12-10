@@ -16,6 +16,7 @@ fun NavController.navigateToLearnGraph(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.learnGraph(
     navigateToConsonants: () -> Unit,
+    navigateToToneMarks: () -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit
 ) {
     navigation(
@@ -25,8 +26,8 @@ fun NavGraphBuilder.learnGraph(
         composable(route = learnRoute) {
             LearnScreen(
                 navigateToConsonants = navigateToConsonants,
+                navigateToToneMarks = navigateToToneMarks,
                 navigateToVowels = { /*TODO*/ },
-                navigateToToneMarks = { /*TODO*/ }
             )
         }
         nestedGraphs()

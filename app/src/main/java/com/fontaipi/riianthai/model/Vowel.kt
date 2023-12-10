@@ -1,12 +1,11 @@
 package com.fontaipi.riianthai.model
 
-import com.fontaipi.riianthai.data.database.entity.ConsonantEntity
 import kotlinx.serialization.Serializable
 
 enum class VowelClass {
     Short,
     Long,
-    All
+    Any
 }
 
 @Serializable

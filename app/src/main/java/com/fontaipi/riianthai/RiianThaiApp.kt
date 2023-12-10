@@ -46,6 +46,7 @@ import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
 import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
+import com.fontaipi.riianthai.ui.page.tone.ToneMarksScreen
 
 @Immutable
 data class TopAppBarState(
@@ -207,12 +208,18 @@ fun BottomNavHost(
         learnGraph(
             navigateToConsonants = {
                 navController.navigate("consonants")
-            }
+            },
+            navigateToToneMarks = {
+                navController.navigate("toneMarks")
+            },
         ) {
             composable("consonants") {
                 ConsonantsRoute(
                     navigateToConsonantDetail = navigateToConsonantDetail
                 )
+            }
+            composable("toneMarks") {
+                ToneMarksScreen()
             }
         }
 
