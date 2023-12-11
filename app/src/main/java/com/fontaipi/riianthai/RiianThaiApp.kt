@@ -44,9 +44,14 @@ import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
 import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
 import com.fontaipi.riianthai.ui.page.practice.PracticeScreen
+import com.fontaipi.riianthai.ui.page.practice.navigation.navigateToPracticeGraph
+import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraph
+import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraphPattern
+import com.fontaipi.riianthai.ui.page.practice.navigation.practiceRoute
 import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
 import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
 import com.fontaipi.riianthai.ui.page.tone.ToneMarksScreen
+import com.fontaipi.riianthai.ui.page.vocabulary.VocabularyScreen
 
 @Immutable
 data class TopAppBarState(
@@ -57,7 +62,7 @@ data class TopAppBarState(
 
 @Immutable
 data class ScaffoldViewState(
-    val topAppBarState: TopAppBarState = TopAppBarState(),
+    val topAppBarState: TopAppBarState = TopAppBarState(title = { Text("Riian Thai") }),
     val onFabClick: (() -> Unit)? = null,
     val fabIcon: ImageVector? = null,
 )
@@ -186,20 +191,17 @@ fun BottomNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.PRACTICE.path
+        startDestination = practiceGraphPattern
     ) {
-        composable(TopLevelDestination.PRACTICE.path) {
-            LaunchedEffect(Unit) {
-                updateScaffoldViewState(
-                    ScaffoldViewState(
-                        topAppBarState = TopAppBarState(
-                            title = { Text("Riian Thai \uD83C\uDDF9\uD83C\uDDED") },
-                        ),
-                        onFabClick = null
-                    )
-                )
+        practiceGraph(
+            navigateToFlashcard = {},
+            navigateToVocabulary = {
+                navController.navigate("vocabulary")
             }
-            PracticeScreen()
+        ) {
+            composable("vocabulary") {
+                VocabularyScreen()
+            }
         }
 
         learnGraph(
@@ -221,16 +223,6 @@ fun BottomNavHost(
         }
 
         composable(TopLevelDestination.SETTINGS.path) {
-            LaunchedEffect(Unit) {
-                updateScaffoldViewState(
-                    ScaffoldViewState(
-                        topAppBarState = TopAppBarState(
-                            title = { Text("Settings") },
-                        ),
-                        onFabClick = null
-                    )
-                )
-            }
             SettingsScreen()
         }
     }
@@ -256,7 +248,7 @@ class RiianThaiState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentBottomNavDestination?.route) {
-            TopLevelDestination.PRACTICE.path -> TopLevelDestination.PRACTICE
+            practiceRoute -> TopLevelDestination.PRACTICE
             learnRoute -> TopLevelDestination.LEARN
             TopLevelDestination.SETTINGS.path -> TopLevelDestination.SETTINGS
             else -> null
@@ -272,7 +264,10 @@ class RiianThaiState(
 
         when (topLevelDestination) {
             TopLevelDestination.LEARN -> bottomNavController.navigateToLearnGraph(topLevelNavOptions)
-            TopLevelDestination.PRACTICE -> bottomNavController.navigate(TopLevelDestination.PRACTICE.path)
+            TopLevelDestination.PRACTICE -> bottomNavController.navigateToPracticeGraph(
+                topLevelNavOptions
+            )
+
             TopLevelDestination.SETTINGS -> bottomNavController.navigate(TopLevelDestination.SETTINGS.path)
         }
 

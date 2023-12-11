@@ -16,7 +16,10 @@ import com.fontaipi.riianthai.ui.page.practice.component.PracticeCategoryCard
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
 @Composable
-fun PracticeScreen() {
+fun PracticeScreen(
+    navigateToFlashcard: () -> Unit,
+    navigateToVocabulary: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,7 +35,7 @@ fun PracticeScreen() {
             item {
                 PracticeCategoryCard(
                     title = "Flashcards",
-                    onClick = {},
+                    onClick = navigateToFlashcard,
                     color = MaterialTheme.colorScheme.primaryContainer,
                     circleColor = MaterialTheme.colorScheme.primary
                 )
@@ -40,7 +43,7 @@ fun PracticeScreen() {
             item {
                 PracticeCategoryCard(
                     title = "Vocabulary",
-                    onClick = {},
+                    onClick = navigateToVocabulary,
                     color = MaterialTheme.colorScheme.secondaryContainer,
                     circleColor = MaterialTheme.colorScheme.secondary
                 )
@@ -61,6 +64,9 @@ fun PracticeScreen() {
 @Composable
 private fun PracticeScreenPreview() {
     RiianThaiTheme {
-        PracticeScreen()
+        PracticeScreen(
+            navigateToFlashcard = {},
+            navigateToVocabulary = {}
+        )
     }
 }
