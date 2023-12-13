@@ -2,6 +2,8 @@ package com.fontaipi.riianthai.data.di
 
 import com.fontaipi.riianthai.data.repository.ConsonantRepository
 import com.fontaipi.riianthai.data.repository.ConsonantRepositoryImpl
+import com.fontaipi.riianthai.data.repository.VowelRepository
+import com.fontaipi.riianthai.data.repository.VowelRepositoryImpl
 import com.fontaipi.riianthai.data.repository.WordRepository
 import com.fontaipi.riianthai.data.repository.WordRepositoryImpl
 import dagger.Binds
@@ -16,6 +18,11 @@ interface RepositoryModule {
     fun bindsConsonantRepository(
         consonantRepository: ConsonantRepositoryImpl,
     ): ConsonantRepository
+
+    @Binds
+    fun bindsVowelRepository(
+        vowelRepository: VowelRepositoryImpl,
+    ): VowelRepository
 
     @Binds
     fun bindsWordRepository(

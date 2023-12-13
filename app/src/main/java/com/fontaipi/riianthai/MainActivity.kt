@@ -10,9 +10,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.fontaipi.riianthai.data.database.dao.ConsonantDao
+import com.fontaipi.riianthai.data.database.dao.VowelDao
+import com.fontaipi.riianthai.data.database.dao.VowelFormDao
 import com.fontaipi.riianthai.data.database.dao.WordDao
 import com.fontaipi.riianthai.data.database.entity.ConsonantWordsCrossRef
 import com.fontaipi.riianthai.model.Consonant
+import com.fontaipi.riianthai.model.Vowel
 import com.fontaipi.riianthai.model.asEntity
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,16 +31,37 @@ class MainActivity : ComponentActivity() {
     lateinit var consonantDao: ConsonantDao
 
     @Inject
+    lateinit var vowelDao: VowelDao
+
+    @Inject
+    lateinit var vowelFormDao: VowelFormDao
+
+    @Inject
     lateinit var wordDao: WordDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val jsonString = assets.open("consonants.json").readBytes().decodeToString()
-            val consonants = Json.decodeFromString<List<Consonant>>(jsonString)
+            val consonantJsonString = assets.open("consonants.json").readBytes().decodeToString()
+            val consonants = Json.decodeFromString<List<Consonant>>(consonantJsonString)
+
+            val vowelJsonString = assets.open("vowels.json").readBytes().decodeToString()
+            val vowels = Json.decodeFromString<List<Vowel>>(vowelJsonString)
+
             if (consonantDao.countConsonants() == 0) {
                 consonantDao.upsertConsonants(consonants.map { it.asEntity() })
             }
+            if (vowelDao.countVowels() == 0) {
+                vowelDao.upsertVowels(vowels.map { it.asEntity() })
+                vowels.forEach {
+                    vowelFormDao.upsertVowelForms(it.writingForms.map { vowelForm ->
+                        vowelForm.asEntity(
+                            it.id
+                        )
+                    })
+                }
+            }
+
             if (wordDao.countWords() == 0) {
                 wordDao.upsertWords(consonants.flatMap { it.exampleWords }.map { it.asEntity() })
                 consonantDao.insertOrIgnoreWordCrossRefEntities(

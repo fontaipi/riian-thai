@@ -40,7 +40,7 @@ fun LearnScreen(
             LearningCategoryCard(
                 title = "Vowels",
                 subtitle = "Learn the vowels of the Thai alphabet",
-                onClick = {},
+                onClick = navigateToVowels,
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 circleColor = MaterialTheme.colorScheme.secondary
             )

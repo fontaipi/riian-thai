@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -17,7 +18,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,7 +43,6 @@ import com.fontaipi.riianthai.ui.page.flashcard.FlashcardScreen
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
 import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
-import com.fontaipi.riianthai.ui.page.practice.PracticeScreen
 import com.fontaipi.riianthai.ui.page.practice.navigation.navigateToPracticeGraph
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraph
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraphPattern
@@ -52,6 +51,9 @@ import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
 import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
 import com.fontaipi.riianthai.ui.page.tone.ToneMarksScreen
 import com.fontaipi.riianthai.ui.page.vocabulary.VocabularyScreen
+import com.fontaipi.riianthai.ui.page.vowel.detail.navigation.navigateToVowel
+import com.fontaipi.riianthai.ui.page.vowel.detail.navigation.vowelScreen
+import com.fontaipi.riianthai.ui.page.vowel.list.VowelRoute
 
 @Immutable
 data class TopAppBarState(
@@ -87,7 +89,7 @@ fun RiianThaiApp(
                                     }
                                 ) {
                                     Icon(
-                                        imageVector = Icons.Filled.ArrowBack,
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                         contentDescription = "backArrow",
                                     )
                                 }
@@ -133,7 +135,10 @@ fun RiianThaiApp(
                         },
                         navigateToConsonantDetail = {
                             appState.navController.navigate("consonants/${it}")
-                        }
+                        },
+                        navigateToVowelDetail = {
+                            appState.navController.navigateToVowel(it)
+                        },
                     )
                 }
             }
@@ -175,6 +180,12 @@ fun RiianThaiApp(
                 }
             )
         }
+
+        vowelScreen(
+            onBackClick = {
+                appState.navController.popBackStack()
+            }
+        )
     }
 }
 
@@ -187,6 +198,7 @@ fun BottomNavHost(
     navigateToSummaryScreen: () -> Unit,
     navigateToConsonants: () -> Unit,
     navigateToConsonantDetail: (Long) -> Unit,
+    navigateToVowelDetail: (Long) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -208,6 +220,9 @@ fun BottomNavHost(
             navigateToConsonants = {
                 navController.navigate("consonants")
             },
+            navigateToVowels = {
+                navController.navigate("vowels")
+            },
             navigateToToneMarks = {
                 navController.navigate("toneMarks")
             },
@@ -215,6 +230,11 @@ fun BottomNavHost(
             composable("consonants") {
                 ConsonantsRoute(
                     navigateToConsonantDetail = navigateToConsonantDetail
+                )
+            }
+            composable("vowels") {
+                VowelRoute(
+                    navigateToVowelDetail = navigateToVowelDetail
                 )
             }
             composable("toneMarks") {
