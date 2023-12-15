@@ -49,31 +49,31 @@ class MainActivity : ComponentActivity() {
             val vowels = Json.decodeFromString<List<Vowel>>(vowelJsonString)
 
             if (consonantDao.countConsonants() == 0) {
-                consonantDao.upsertConsonants(consonants.map { it.asEntity() })
-            }
-            if (vowelDao.countVowels() == 0) {
-                vowelDao.upsertVowels(vowels.map { it.asEntity() })
-                vowels.forEach {
-                    vowelFormDao.upsertVowelForms(it.writingForms.map { vowelForm ->
-                        vowelForm.asEntity(
-                            it.id
+                consonants.forEach { consonant ->
+                    val consonantId = consonantDao.upsertConsonant(consonant.asEntity())
+                    consonant.exampleWords.forEach {
+                        val wordId = wordDao.upsertWord(it.asEntity())
+                        consonantDao.insertOrIgnoreWordCrossRefEntity(
+                            ConsonantWordsCrossRef(
+                                consonantId = consonantId,
+                                wordId = wordId
+                            )
                         )
-                    })
+                    }
                 }
             }
 
-            if (wordDao.countWords() == 0) {
-                wordDao.upsertWords(consonants.flatMap { it.exampleWords }.map { it.asEntity() })
-                consonantDao.insertOrIgnoreWordCrossRefEntities(
-                    consonants.flatMap { consonant ->
-                        consonant.exampleWords.map { word ->
-                            ConsonantWordsCrossRef(
-                                consonantId = consonant.id,
-                                wordId = word.id
-                            )
-                        }
+            if (vowelDao.countVowels() == 0) {
+                vowels.forEach {
+                    val vowelId = vowelDao.upsertVowel(it.asEntity())
+                    it.writingForms.forEach { vowelForm ->
+                        val wordId = wordDao.upsertWord(vowelForm.exampleWord.asEntity())
+                        vowelFormDao.upsertVowelForm(
+                            vowelForm.asEntity(vowelId).copy(wordId = wordId)
+                        )
                     }
-                )
+
+                }
             }
         }
 
@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
 
             RiianThaiTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 ) {
                     RiianThaiApp()
                 }

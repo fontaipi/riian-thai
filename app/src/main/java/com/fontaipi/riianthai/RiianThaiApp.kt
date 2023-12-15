@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -97,7 +97,22 @@ fun RiianThaiApp(
                                 scaffoldViewState.topAppBarState.navigationIcon()
                             }
                         },
-                        actions = scaffoldViewState.topAppBarState.actions,
+                        actions = {
+                            if (appState.currentDestination?.route != "mainNav") {
+                                IconButton(
+                                    onClick = {
+                                        appState.bottomNavController.popBackStack()
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Close,
+                                        contentDescription = "backArrow",
+                                    )
+                                }
+                            } else {
+                                scaffoldViewState.topAppBarState.actions(this)
+                            }
+                        },
                     )
                 },
                 floatingActionButton = {
@@ -127,19 +142,12 @@ fun RiianThaiApp(
                     BottomNavHost(
                         navController = appState.bottomNavController,
                         updateScaffoldViewState = { scaffoldViewState = it },
-                        navigateToFlashCardScreen = {
-                        },
-                        navigateToSummaryScreen = {
-                        },
-                        navigateToConsonants = {
-                        },
                         navigateToConsonantDetail = {
                             appState.navController.navigate("consonants/${it}")
                         },
-                        navigateToVowelDetail = {
-                            appState.navController.navigateToVowel(it)
-                        },
-                    )
+                    ) {
+                        appState.navController.navigateToVowel(it)
+                    }
                 }
             }
         }
@@ -194,9 +202,6 @@ fun BottomNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     updateScaffoldViewState: (ScaffoldViewState) -> Unit,
-    navigateToFlashCardScreen: (ConsonantClass) -> Unit,
-    navigateToSummaryScreen: () -> Unit,
-    navigateToConsonants: () -> Unit,
     navigateToConsonantDetail: (Long) -> Unit,
     navigateToVowelDetail: (Long) -> Unit,
 ) {
@@ -262,6 +267,9 @@ class RiianThaiState(
     val navController: NavHostController,
     val bottomNavController: NavHostController,
 ) {
+    val currentDestination: NavDestination?
+        @Composable get() = navController.currentBackStackEntryAsState().value?.destination
+
     val currentBottomNavDestination: NavDestination?
         @Composable get() = bottomNavController
             .currentBackStackEntryAsState().value?.destination

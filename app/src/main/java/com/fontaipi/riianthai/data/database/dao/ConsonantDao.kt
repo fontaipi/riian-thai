@@ -28,7 +28,10 @@ interface ConsonantDao {
     suspend fun countConsonants(): Int
 
     @Upsert
-    suspend fun upsertConsonants(consonants: List<ConsonantEntity>)
+    suspend fun upsertConsonant(consonant: ConsonantEntity): Long
+
+    @Upsert
+    suspend fun upsertConsonants(consonants: List<ConsonantEntity>): List<Long>
 
     @Query("UPDATE consonant SET count = count + 1 WHERE id = :id")
     suspend fun incrementCount(id: Long)

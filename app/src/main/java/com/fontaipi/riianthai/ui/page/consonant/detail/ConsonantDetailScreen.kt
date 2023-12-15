@@ -8,25 +8,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,9 +50,9 @@ import com.fontaipi.riianthai.model.Word
 import com.fontaipi.riianthai.ui.component.WordCard
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.ConfirmDeleteWordDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
-import com.fontaipi.riianthai.ui.page.consonant.detail.component.UpsertWordBottomSheet
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
+import com.fontaipi.riianthai.ui.page.consonant.detail.component.UpsertWordBottomSheet
 import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
@@ -75,6 +75,7 @@ fun ConsonantDetailRoute(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConsonantDetailScreen(
     consonantDetailState: ConsonantDetailState,
@@ -92,30 +93,37 @@ fun ConsonantDetailScreen(
     var showEditWordBottomSheet by remember { mutableStateOf(false) }
     var selectedWord by remember { mutableStateOf<Word?>(null) }
 
-    Surface {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { },
+                actions = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.Rounded.Close,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { paddingsValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding()
-                .navigationBarsPadding()
+                .padding(paddingsValues)
                 .padding(horizontal = 16.dp)
                 .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(
-                modifier = Modifier.align(Alignment.End),
-                onClick = onBackClick,
-            ) {
-                Icon(Icons.Rounded.Close, null)
-            }
             when (consonantDetailState) {
                 is ConsonantDetailState.Success -> {
                     val coroutineScope = rememberCoroutineScope()
                     val context = LocalContext.current
+
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.Start
                     ) {
                         Row(
@@ -191,7 +199,7 @@ fun ConsonantDetailScreen(
                                             },
                                         ) {
                                             Icon(
-                                                imageVector = Icons.Rounded.VolumeUp,
+                                                imageVector = Icons.AutoMirrored.Rounded.VolumeUp,
                                                 contentDescription = null
                                             )
                                         }
@@ -375,7 +383,6 @@ fun ConsonantDetailScreen(
             }
         }
     }
-
 }
 
 @Preview

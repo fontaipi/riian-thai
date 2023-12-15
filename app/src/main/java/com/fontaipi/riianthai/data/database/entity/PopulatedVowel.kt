@@ -13,7 +13,7 @@ data class PopulatedVowel(
         parentColumn = "id",
         entityColumn = "vowel_id"
     )
-    val forms: List<VowelFormEntity>,
+    val forms: List<PopulatedVowelForm>,
 )
 
 fun PopulatedVowel.asExternalModel() = Vowel(
@@ -22,6 +22,6 @@ fun PopulatedVowel.asExternalModel() = Vowel(
     vowelClass = entity.vowelClass,
     audioFile = entity.audioFile,
     soundFile = entity.soundFile,
-    writingForms = forms.map(VowelFormEntity::asExternalModel),
+    writingForms = forms.map(PopulatedVowelForm::asExternalModel),
     note = entity.note
 )

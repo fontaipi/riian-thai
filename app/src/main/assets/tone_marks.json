@@ -1,24 +1,20 @@
 [
   {
-    "id": 1,
     "thai": "ไม้เอก",
     "phonetic": "maai^H aehk^L",
     "symbol": "\u0e48"
   },
   {
-    "id": 2,
     "thai": "ไม้โท",
     "phonetic": "maai^H tho^M",
     "symbol": "\u0e49"
   },
   {
-    "id": 3,
     "thai": "ไม้ตรี ",
     "phonetic": "maai^H dtreeM",
     "symbol": "\u0e4a"
   },
   {
-    "id": 4,
     "thai": "ไม้จัตวา",
     "phonetic": "maai^H jat^L dta^L waa^M",
     "symbol": "\u0e4b"

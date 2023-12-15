@@ -18,7 +18,7 @@ import com.fontaipi.riianthai.data.database.entity.WordEntity
         VowelEntity::class,
         VowelFormEntity::class,
         WordEntity::class,
-        ConsonantWordsCrossRef::class
+        ConsonantWordsCrossRef::class,
     ],
     version = 1,
     exportSchema = false,

@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "thai": "ก",
     "phonetic": "gaaw^M-gai^L",
     "audio": "audio/consonant/audio_gaaw_gai.mp3",
@@ -11,19 +10,16 @@
     "endingSound": "K",
     "exampleWords": [
       {
-        "id": 1,
         "thai": "กา",
         "meaning": "Crow"
       },
       {
-        "id": 2,
         "thai": "กล้วย",
         "meaning": "Banana"
       }
     ]
   },
   {
-    "id": 2,
     "thai": "ข",
     "phonetic": "khaaw^R-khai^L",
     "audio": "audio/consonant/audio_khaaw_khai.mp3",
@@ -34,19 +30,16 @@
     "endingSound": "K",
     "exampleWords": [
       {
-        "id": 3,
         "thai": "ข่า",
         "meaning": "Galangal"
       },
       {
-        "id": 4,
         "thai": "ขา",
         "meaning": "Leg"
       }
     ]
   },
   {
-    "id": 3,
     "thai": "ฃ",
     "phonetic": "khaaw^R-khuat^L",
     "audio": "audio/consonant/audio_khaaw_khuat.mp3",
@@ -58,7 +51,6 @@
     "exampleWords": []
   },
   {
-    "id": 4,
     "thai": "ค",
     "phonetic": "khaaw^M-khwaai^M",
     "audio": "audio/consonant/audio_khaaw_khwaai.mp3",
@@ -69,19 +61,16 @@
     "endingSound": "K",
     "exampleWords": [
       {
-        "id": 5,
         "thai": "ค้างคาว",
         "meaning": "Bat"
       },
       {
-        "id": 6,
         "thai": "ครีม",
         "meaning": "Cream"
       }
     ]
   },
   {
-    "id": 5,
     "thai": "ฅ",
     "phonetic": "khaaw^M-khon^M",
     "audio": "audio/consonant/audio_khaaw_khon.mp3",
@@ -93,7 +82,6 @@
     "exampleWords": []
   },
   {
-    "id": 6,
     "thai": "ฆ",
     "phonetic": "khaaw^M-ra^H-khang^M",
     "audio": "audio/consonant/audio_khaaw_ra_khang.mp3",
@@ -104,19 +92,16 @@
     "endingSound": "K",
     "exampleWords": [
       {
-        "id": 7,
         "thai": "ฆ้อง",
         "meaning": "Gong"
       },
       {
-        "id": 8,
         "thai": "ฆ่า",
         "meaning": "To kill"
       }
     ]
   },
   {
-    "id": 7,
     "thai": "ง",
     "phonetic": "ngaaw^M-nguu^M",
     "audio": "audio/consonant/audio_ngaaw_nguu.mp3",
@@ -127,19 +112,16 @@
     "endingSound": "Ng",
     "exampleWords": [
       {
-        "id": 9,
         "thai": "งู",
         "meaning": "Snake"
       },
       {
-        "id": 10,
         "thai": "งาน",
         "meaning": "Work"
       }
     ]
   },
   {
-    "id": 8,
     "thai": "จ",
     "phonetic": "jaaw^M-jaan^M",
     "audio": "audio/consonant/audio_jaaw_jaan.mp3",
@@ -150,19 +132,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 11,
         "thai": "จด",
         "meaning": "To note"
       },
       {
-        "id": 12,
         "thai": "จร",
         "meaning": "To travel"
       }
     ]
   },
   {
-    "id": 9,
     "thai": "ฉ",
     "phonetic": "chaaw^R-ching^L",
     "audio": "audio/consonant/audio_chaaw_ching.mp3",
@@ -173,19 +152,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 13,
         "thai": "ฉลาด",
         "meaning": "Smart"
       },
       {
-        "id": 14,
         "thai": "ฉลาม",
         "meaning": "Shark"
       }
     ]
   },
   {
-    "id": 10,
     "thai": "ช",
     "phonetic": "chaaw^M-chaang^H",
     "audio": "audio/consonant/audio_chaaw_chaang.mp3",
@@ -196,19 +172,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 15,
         "thai": "ชา",
         "meaning": "Tea"
       },
       {
-        "id": 16,
         "thai": "ชั้น",
         "meaning": "Shelf"
       }
     ]
   },
   {
-    "id": 11,
     "thai": "ซ",
     "phonetic": "saaw^M-soh^F",
     "audio": "audio/consonant/audio_saaw_so.mp3",
@@ -219,19 +192,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 17,
         "thai": "ซุป",
         "meaning": "Soup"
       },
       {
-        "id": 18,
         "thai": "ซอย",
         "meaning": "Alley"
       }
     ]
   },
   {
-    "id": 12,
     "thai": "ฌ",
     "phonetic": "chaaw^M-chuuhr^M",
     "audio": "audio/consonant/audio_chaaw_cher.mp3",
@@ -242,19 +212,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 19,
         "thai": "ฌาน",
         "meaning": "Meditation"
       },
       {
-        "id": 20,
         "thai": "ฌอน",
         "meaning": "Support"
       }
     ]
   },
   {
-    "id": 13,
     "thai": "ญ",
     "phonetic": "yaaw^M-ying^R",
     "audio": "audio/consonant/audio_yaaw_ying.mp3",
@@ -265,19 +232,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 21,
         "thai": "ญี่ปุ่น",
         "meaning": "Japan"
       },
       {
-        "id": 22,
         "thai": "ญาณ",
         "meaning": "Wisdom"
       }
     ]
   },
   {
-    "id": 14,
     "thai": "ฎ",
     "phonetic": "daaw^M-cha^H-daa^M",
     "audio": "audio/consonant/audio_daaw_cha_daa.mp3",
@@ -288,19 +252,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 23,
         "thai": "ฎีกา",
         "meaning": "Crow"
       },
       {
-        "id": 24,
         "thai": "ฎา",
         "meaning": "Title"
       }
     ]
   },
   {
-    "id": 15,
     "thai": "ฏ",
     "phonetic": "dtaaw^M-bpa^L-dtak^L",
     "audio": "audio/consonant/audio_dtaaw_bpa_dtak.mp3",
@@ -311,19 +272,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 25,
         "thai": "ฏิบัติ",
         "meaning": "Practice"
       },
       {
-        "id": 26,
         "thai": "ฏาก",
         "meaning": "Frame"
       }
     ]
   },
   {
-    "id": 16,
     "thai": "ฐ",
     "phonetic": "thaaw^R-thaan^R",
     "audio": "audio/consonant/audio_thaaw_thaan.mp3",
@@ -334,19 +292,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 27,
         "thai": "ฐาน",
         "meaning": "Base"
       },
       {
-        "id": 28,
         "thai": "ฐิต",
         "meaning": "Mind"
       }
     ]
   },
   {
-    "id": 17,
     "thai": "ฑ",
     "phonetic": "thaaw^M-mohn^M-tho^H",
     "audio": "audio/consonant/audio_thaaw_mon_tho.mp3",
@@ -357,19 +312,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 29,
         "thai": "ฑูต",
         "meaning": "Ambassador"
       },
       {
-        "id": 30,
         "thai": "ฑาหก",
         "meaning": "Hunter"
       }
     ]
   },
   {
-    "id": 18,
     "thai": "ฒ",
     "phonetic": "thaaw^M-phuu^F-thao^F",
     "audio": "audio/consonant/audio_thaaw_phuu_thao.mp3",
@@ -380,19 +332,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 31,
         "thai": "ฒิวด",
         "meaning": "Youth"
       },
       {
-        "id": 32,
         "thai": "ฒิ",
         "meaning": "Majesty"
       }
     ]
   },
   {
-    "id": 19,
     "thai": "ณ",
     "phonetic": "naaw^M-naehn^M",
     "audio": "audio/consonant/audio_naaw_nain.mp3",
@@ -403,19 +352,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 33,
         "thai": "ณิชา",
         "meaning": "Girl's name"
       },
       {
-        "id": 34,
         "thai": "ณฐาน",
         "meaning": "Position"
       }
     ]
   },
   {
-    "id": 20,
     "thai": "ด",
     "phonetic": "daaw^M-dek^L",
     "audio": "audio/consonant/audio_daaw_dek.mp3",
@@ -426,19 +372,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 35,
         "thai": "ดวง",
         "meaning": "Star"
       },
       {
-        "id": 36,
         "thai": "ดอก",
         "meaning": "Flower"
       }
     ]
   },
   {
-    "id": 21,
     "thai": "ต",
     "phonetic": "dtaaw^M-dtao^L",
     "audio": "audio/consonant/audio_dtaaw_dtao.mp3",
@@ -449,19 +392,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 37,
         "thai": "ตา",
         "meaning": "Eye"
       },
       {
-        "id": 38,
         "thai": "ต้น",
         "meaning": "Tree"
       }
     ]
   },
   {
-    "id": 22,
     "thai": "ถ",
     "phonetic": "thaaw^R-thoong^R",
     "audio": "audio/consonant/audio_thaaw_thoong.mp3",
@@ -472,19 +412,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 39,
         "thai": "ถนน",
         "meaning": "Road"
       },
       {
-        "id": 40,
         "thai": "ถ้วย",
         "meaning": "Cup"
       }
     ]
   },
   {
-    "id": 23,
     "thai": "ท",
     "phonetic": "thaaw^M-thaH-haan^R",
     "audio": "audio/consonant/audio_thaaw_tha_haan.mp3",
@@ -495,19 +432,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 41,
         "thai": "ทะเล",
         "meaning": "Sea"
       },
       {
-        "id": 42,
         "thai": "ทอง",
         "meaning": "Gold"
       }
     ]
   },
   {
-    "id": 24,
     "thai": "ธ",
     "phonetic": "thaaw^M-thohng^M",
     "audio": "audio/consonant/audio_thaaw_thohng.mp3",
@@ -518,19 +452,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 43,
         "thai": "ธง",
         "meaning": "Flag"
       },
       {
-        "id": 44,
         "thai": "ธนาคาร",
         "meaning": "Bank"
       }
     ]
   },
   {
-    "id": 25,
     "thai": "น",
     "phonetic": "naaw^M-nuu^R",
     "audio": "audio/consonant/audio_naaw_nuu.mp3",
@@ -541,19 +472,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 45,
         "thai": "น้ำ",
         "meaning": "Water"
       },
       {
-        "id": 46,
         "thai": "นก",
         "meaning": "Bird"
       }
     ]
   },
   {
-    "id": 26,
     "thai": "บ",
     "phonetic": "baaw^M-bai^M-maai^H",
     "audio": "audio/consonant/audio_baaw_bai_maai.mp3",
@@ -564,19 +492,16 @@
     "endingSound": "P",
     "exampleWords": [
       {
-        "id": 47,
         "thai": "บ้าน",
         "meaning": "House"
       },
       {
-        "id": 48,
         "thai": "บอล",
         "meaning": "Ball"
       }
     ]
   },
   {
-    "id": 27,
     "thai": "ป",
     "phonetic": "bpaaw^M-bplaa^M",
     "audio": "audio/consonant/audio_bpaaw_bplaa.mp3",
@@ -587,19 +512,16 @@
     "endingSound": "P",
     "exampleWords": [
       {
-        "id": 49,
         "thai": "ปลา",
         "meaning": "Fish"
       },
       {
-        "id": 50,
         "thai": "ป่า",
         "meaning": "Forest"
       }
     ]
   },
   {
-    "id": 28,
     "thai": "ผ",
     "phonetic": "phaaw^R-pheung^F",
     "audio": "audio/consonant/audio_phaaw_pheung.mp3",
@@ -610,19 +532,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 51,
         "thai": "ผ้า",
         "meaning": "Cloth"
       },
       {
-        "id": 52,
         "thai": "ผี",
         "meaning": "Ghost"
       }
     ]
   },
   {
-    "id": 29,
     "thai": "ฝ",
     "phonetic": "faaw^R-faa^R",
     "audio": "audio/consonant/audio_faaw_faa.mp3",
@@ -633,19 +552,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 53,
         "thai": "ฝน",
         "meaning": "Rain"
       },
       {
-        "id": 54,
         "thai": "ฝา",
         "meaning": "Lid"
       }
     ]
   },
   {
-    "id": 30,
     "thai": "พ",
     "phonetic": "phaaw^M-phaan^M",
     "audio": "audio/consonant/audio_phaaw_phaan.mp3",
@@ -656,19 +572,16 @@
     "endingSound": "P",
     "exampleWords": [
       {
-        "id": 55,
         "thai": "พระ",
         "meaning": "Monk"
       },
       {
-        "id": 56,
         "thai": "พัด",
         "meaning": "Fan"
       }
     ]
   },
   {
-    "id": 31,
     "thai": "ฟ",
     "phonetic": "faaw^M-fan^M",
     "audio": "audio/consonant/audio_faaw_fan.mp3",
@@ -679,19 +592,16 @@
     "endingSound": "P",
     "exampleWords": [
       {
-        "id": 57,
         "thai": "ฟ้า",
         "meaning": "Sky"
       },
       {
-        "id": 58,
         "thai": "ฟัน",
         "meaning": "Tooth"
       }
     ]
   },
   {
-    "id": 32,
     "thai": "ภ",
     "phonetic": "phaaw^M-sam^R-phao^M",
     "audio": "audio/consonant/audio_phaaw_sam_phao.mp3",
@@ -702,19 +612,16 @@
     "endingSound": "P",
     "exampleWords": [
       {
-        "id": 59,
         "thai": "ภาษา",
         "meaning": "Language"
       },
       {
-        "id": 60,
         "thai": "ภูเขา",
         "meaning": "Mountain"
       }
     ]
   },
   {
-    "id": 33,
     "thai": "ม",
     "phonetic": "maaw^M-maa^H",
     "audio": "audio/consonant/audio_maaw_maa.mp3",
@@ -725,19 +632,16 @@
     "endingSound": "M",
     "exampleWords": [
       {
-        "id": 61,
         "thai": "ม้า",
         "meaning": "Horse"
       },
       {
-        "id": 62,
         "thai": "มือ",
         "meaning": "Hand"
       }
     ]
   },
   {
-    "id": 34,
     "thai": "ย",
     "phonetic": "yaaw^M-yak^H",
     "audio": "audio/consonant/audio_yaaw_yak.mp3",
@@ -748,19 +652,16 @@
     "endingSound": "Y",
     "exampleWords": [
       {
-        "id": 63,
         "thai": "ยา",
         "meaning": "Medicine"
       },
       {
-        "id": 64,
         "thai": "ยิ้ม",
         "meaning": "Smile"
       }
     ]
   },
   {
-    "id": 35,
     "thai": "ร",
     "phonetic": "raaw^M-reuua^M",
     "audio": "audio/consonant/audio_raaw_reuua.mp3",
@@ -771,19 +672,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 65,
         "thai": "รถ",
         "meaning": "Car"
       },
       {
-        "id": 66,
         "thai": "รัก",
         "meaning": "Love"
       }
     ]
   },
   {
-    "id": 36,
     "thai": "ล",
     "phonetic": "laaw^M-ling^M",
     "audio": "audio/consonant/audio_laaw_ling.mp3",
@@ -794,19 +692,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 67,
         "thai": "ลม",
         "meaning": "Wind"
       },
       {
-        "id": 68,
         "thai": "ลูก",
         "meaning": "Child"
       }
     ]
   },
   {
-    "id": 37,
     "thai": "ว",
     "phonetic": "waaw^M-waaen^R",
     "audio": "audio/consonant/audio_waaw_waaen.mp3",
@@ -817,19 +712,16 @@
     "endingSound": "W",
     "exampleWords": [
       {
-        "id": 69,
         "thai": "วัด",
         "meaning": "Temple"
       },
       {
-        "id": 70,
         "thai": "วง",
         "meaning": "Circle"
       }
     ]
   },
   {
-    "id": 38,
     "thai": "ศ",
     "phonetic": "saaw^R-saa^R-laa^M",
     "audio": "audio/consonant/audio_saaw_saa_laa.mp3",
@@ -840,19 +732,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 71,
         "thai": "ศาล",
         "meaning": "Court"
       },
       {
-        "id": 72,
         "thai": "ศึกษา",
         "meaning": "Study"
       }
     ]
   },
   {
-    "id": 39,
     "thai": "ษ",
     "phonetic": "saaw^R-reuu^M-see^R",
     "audio": "audio/consonant/audio_saaw_reuu_see.mp3",
@@ -863,19 +752,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 73,
         "thai": "ษา",
         "meaning": "Year"
       },
       {
-        "id": 74,
         "thai": "ษะ",
         "meaning": "Head"
       }
     ]
   },
   {
-    "id": 40,
     "thai": "ส",
     "phonetic": "saaw^R-seuua^R",
     "audio": "audio/consonant/audio_saaw_seuua.mp3",
@@ -886,19 +772,16 @@
     "endingSound": "T",
     "exampleWords": [
       {
-        "id": 75,
         "thai": "สาย",
         "meaning": "Line"
       },
       {
-        "id": 76,
         "thai": "สี",
         "meaning": "Color"
       }
     ]
   },
   {
-    "id": 41,
     "thai": "ห",
     "phonetic": "haaw^R-heep^L",
     "audio": "audio/consonant/audio_haaw_heep.mp3",
@@ -909,19 +792,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 77,
         "thai": "หมา",
         "meaning": "Dog"
       },
       {
-        "id": 78,
         "thai": "หนัง",
         "meaning": "Film"
       }
     ]
   },
   {
-    "id": 42,
     "thai": "ฬ",
     "phonetic": "laaw^M-joo^L-laa^M",
     "audio": "audio/consonant/audio_laaw_joo_laa.mp3",
@@ -932,19 +812,16 @@
     "endingSound": "N",
     "exampleWords": [
       {
-        "id": 79,
         "thai": "ฬก",
         "meaning": "Curtain"
       },
       {
-        "id": 80,
         "thai": "ฬห",
         "meaning": "Jewel"
       }
     ]
   },
   {
-    "id": 43,
     "thai": "อ",
     "phonetic": "aaaw^M-aang^L",
     "audio": "audio/consonant/audio_aaaw_aang.mp3",
@@ -955,19 +832,16 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 81,
         "thai": "อากาศ",
         "meaning": "Air"
       },
       {
-        "id": 82,
         "thai": "อิสระ",
         "meaning": "Freedom"
       }
     ]
   },
   {
-    "id": 44,
     "thai": "ฮ",
     "phonetic": "haaw^M-nohk^H-huuk^F",
     "audio": "audio/consonant/audio_haaw_nohk_huuk.mp3",
@@ -978,12 +852,10 @@
     "endingSound": "Impossible",
     "exampleWords": [
       {
-        "id": 83,
         "thai": "ฮา",
         "meaning": "Laugh"
       },
       {
-        "id": 84,
         "thai": "ฮวงจุ้ย",
         "meaning": "Feng Shui"
       }

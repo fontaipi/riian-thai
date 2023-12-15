@@ -6,9 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
-import com.fontaipi.riianthai.data.database.entity.ConsonantEntity
 import com.fontaipi.riianthai.data.database.entity.WordEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WordDao {
@@ -22,7 +20,10 @@ interface WordDao {
     suspend fun updateWord(word: WordEntity)
 
     @Upsert
-    suspend fun upsertWords(words: List<WordEntity>)
+    suspend fun upsertWord(word: WordEntity): Long
+
+    @Upsert
+    suspend fun upsertWords(words: List<WordEntity>): List<Long>
 
     @Delete
     suspend fun deleteWord(word: WordEntity)

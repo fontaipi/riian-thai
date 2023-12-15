@@ -26,7 +26,9 @@ class DatabaseModule {
         context,
         RiianThaiDatabase::class.java,
         "expense-tracker-database",
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     fun providesConsonantDao(

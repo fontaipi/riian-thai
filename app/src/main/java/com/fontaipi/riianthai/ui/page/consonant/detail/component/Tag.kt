@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.VolumeMute
-import androidx.compose.material.icons.rounded.VolumeMute
-import androidx.compose.material.icons.rounded.VolumeUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
@@ -28,6 +26,7 @@ fun Tag(
     icon: ImageVector? = null,
     text: String,
     color: Color = MaterialTheme.colorScheme.surfaceVariant,
+    style: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
     Surface(
         shape = CircleShape,
@@ -44,7 +43,7 @@ fun Tag(
             }
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium)
+                style = style
             )
         }
     }

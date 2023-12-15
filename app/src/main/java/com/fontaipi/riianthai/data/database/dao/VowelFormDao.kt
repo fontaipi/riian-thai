@@ -8,5 +8,8 @@ import com.fontaipi.riianthai.data.database.entity.VowelFormEntity
 interface VowelFormDao {
 
     @Upsert
+    suspend fun upsertVowelForm(vowelForm: VowelFormEntity): Long
+
+    @Upsert
     suspend fun upsertVowelForms(vowelForms: List<VowelFormEntity>)
 }

@@ -11,11 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.Check
@@ -97,12 +95,11 @@ fun ConsonantsScreen(
                             Icon(
                                 imageVector = Icons.Rounded.Check,
                                 contentDescription = null,
-                                modifier = Modifier.size(16.dp)
+                                modifier = Modifier.size(20.dp)
                             )
                         }
                     },
                     colors = FilterChipDefaults.filterChipColors(
-                        containerColor = color.copy(alpha = 0.25f),
                         selectedContainerColor = color
                     ),
                     selected = it == selectedClass,
@@ -126,12 +123,12 @@ fun ConsonantsScreen(
                         if (it == selectedEndingClass) {
                             Icon(
                                 imageVector = Icons.Rounded.Check,
-                                contentDescription = null
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp)
                             )
                         }
                     },
                     colors = FilterChipDefaults.filterChipColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
                         selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                     ),
                     selected = it == selectedEndingClass,
@@ -157,10 +154,10 @@ fun ConsonantsScreen(
                         Icon(
                             imageVector = Icons.Rounded.ArrowDropDown,
                             contentDescription = null,
+                            modifier = Modifier.size(20.dp)
                         )
                     },
                     colors = FilterChipDefaults.filterChipColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
                         selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                         iconColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),

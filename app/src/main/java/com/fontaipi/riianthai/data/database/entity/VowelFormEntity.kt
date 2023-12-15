@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.fontaipi.riianthai.model.VowelForm
 
 @Entity(
     tableName = "vowel_form",
@@ -13,6 +12,11 @@ import com.fontaipi.riianthai.model.VowelForm
             entity = VowelEntity::class,
             parentColumns = ["id"],
             childColumns = ["vowel_id"],
+        ),
+        ForeignKey(
+            entity = WordEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["word_id"],
         )
     ]
 )
@@ -24,13 +28,7 @@ data class VowelFormEntity(
     val accentIndicator: String,
     @ColumnInfo(name = "vowel_id")
     val vowelId: Long,
+    @ColumnInfo(name = "word_id")
+    val wordId: Long,
     val note: String
 )
-
-fun VowelFormEntity.asExternalModel(): VowelForm =
-    VowelForm(
-        id = id,
-        format = format,
-        accentIndicator = accentIndicator,
-        note = note
-    )

@@ -19,6 +19,9 @@ interface VowelDao {
     fun getVowel(id: Long): Flow<PopulatedVowel>
 
     @Upsert
+    suspend fun upsertVowel(vowel: VowelEntity): Long
+
+    @Upsert
     suspend fun upsertVowels(vowels: List<VowelEntity>)
 
     @Query("SELECT COUNT(*) FROM vowel")

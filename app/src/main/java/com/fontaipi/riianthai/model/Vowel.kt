@@ -9,10 +9,16 @@ enum class VowelClass {
     Special
 }
 
+enum class SoundType {
+    Monophthong,
+    Diphthong,
+}
+
 @Serializable
 data class Vowel(
     val id: Long = 0,
     val vowelClass: VowelClass,
+    val soundType: SoundType = SoundType.Monophthong,
     val thaiScript: String,
     val audioFile: String,
     val soundFile: String,
