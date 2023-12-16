@@ -53,10 +53,10 @@ import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.UpsertWordBottomSheet
-import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
+import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.PhoneticText
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
-import com.fontaipi.riianthai.ui.theme.MiddleClassColor
+import com.fontaipi.riianthai.ui.theme.MidClassColor
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
@@ -133,7 +133,7 @@ fun ConsonantDetailScreen(
                         ) {
                             val color = when (consonantDetailState.consonant.consonantClass) {
                                 ConsonantClass.Low -> LowClassColor
-                                ConsonantClass.Mid -> MiddleClassColor
+                                ConsonantClass.Mid -> MidClassColor
                                 ConsonantClass.High -> HighClassColor
                             }
                             Tag(

@@ -48,7 +48,7 @@ import com.fontaipi.riianthai.model.EndingSound
 import com.fontaipi.riianthai.ui.page.summary.component.ConsonantCard
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
-import com.fontaipi.riianthai.ui.theme.MiddleClassColor
+import com.fontaipi.riianthai.ui.theme.MidClassColor
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
 @Composable
@@ -86,7 +86,7 @@ fun ConsonantsScreen(
             ConsonantClass.entries.forEach {
                 val color = when (it) {
                     ConsonantClass.Low -> LowClassColor
-                    ConsonantClass.Mid -> MiddleClassColor
+                    ConsonantClass.Mid -> MidClassColor
                     ConsonantClass.High -> HighClassColor
                 }
                 FilterChip(
@@ -231,7 +231,7 @@ fun ConsonantsScreen(
                     items(filteredConsonants) {
                         val color = when (it.consonantClass) {
                             ConsonantClass.Low -> LowClassColor
-                            ConsonantClass.Mid -> MiddleClassColor
+                            ConsonantClass.Mid -> MidClassColor
                             ConsonantClass.High -> HighClassColor
                         }
                         ConsonantCard(

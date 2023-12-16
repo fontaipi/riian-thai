@@ -34,10 +34,10 @@ import androidx.compose.ui.unit.sp
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.model.ToneMark
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
-import com.fontaipi.riianthai.ui.page.flashcard.component.PhoneticText
+import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.PhoneticText
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
-import com.fontaipi.riianthai.ui.theme.MiddleClassColor
+import com.fontaipi.riianthai.ui.theme.MidClassColor
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
 enum class SyllableType {
@@ -175,7 +175,7 @@ fun ToneMarkRulesTable(
                     ) {
                         val color = when (consonantClass) {
                             ConsonantClass.Low -> LowClassColor
-                            ConsonantClass.Mid -> MiddleClassColor
+                            ConsonantClass.Mid -> MidClassColor
                             ConsonantClass.High -> HighClassColor
                         }
                         Tag(text = consonantClass.name, color = color)

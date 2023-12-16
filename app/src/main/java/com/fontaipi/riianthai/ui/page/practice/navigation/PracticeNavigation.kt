@@ -5,8 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.fontaipi.riianthai.ui.page.learn.LearnScreen
-import com.fontaipi.riianthai.ui.page.practice.PracticeScreen
+import com.fontaipi.riianthai.ui.page.practice.PracticeRoute
 
 const val practiceGraphPattern = "practice_graph"
 const val practiceRoute = "practice_route"
@@ -25,7 +24,7 @@ fun NavGraphBuilder.practiceGraph(
         startDestination = practiceRoute
     ) {
         composable(route = practiceRoute) {
-            PracticeScreen(
+            PracticeRoute(
                 navigateToFlashcard = navigateToFlashcard,
                 navigateToVocabulary = navigateToVocabulary,
             )

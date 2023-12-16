@@ -28,6 +28,10 @@ class ConsonantRepositoryImpl @Inject constructor(
             .map { it.asExternalModel() }
     }
 
+    override fun getFlashcardProgress(): Flow<Float> {
+        return consonantDao.getFlashcardProgress()
+    }
+
     override suspend fun incrementCount(id: Long) = withContext(Dispatchers.IO) {
         consonantDao.incrementCount(id)
     }

@@ -1,0 +1,722 @@
+[
+  {
+    "vowelClass": "Short",
+    "soundType": "Monophthong",
+    "thaiScript": "อะ",
+    "audioFile": "audio/vowel/sara_a.mp3",
+    "soundFile": "audio/vowel/a.mp3",
+    "writingForms": [
+      {
+        "format": "Iะ",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "มะม่วง",
+          "meaning": "Mango",
+          "audioFile": "audio/word/mango.mp3"
+        }
+      },
+      {
+        "format": "I–ัE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "รัก",
+          "meaning": "To love",
+          "audioFile": "audio/word/to_love.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อา",
+    "audioFile": "audio/vowel/sara_aa.mp3",
+    "soundFile": "audio/vowel/aa.mp3",
+    "writingForms": [
+      {
+        "format": "Iา",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "บาด",
+          "meaning": "To cut",
+          "audioFile": "audio/word/to_cut.mp3"
+        }
+      },
+      {
+        "format": "IาE",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ลาก่อน",
+          "meaning": "Goodbye",
+          "audioFile": "audio/word/goodbye.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "อิ",
+    "audioFile": "audio/vowel/sara_i.mp3",
+    "soundFile": "audio/vowel/i.mp3",
+    "writingForms": [
+      {
+        "format": "I–ิ",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "วินาที",
+          "meaning": "A second",
+          "audioFile": "audio/word/second.mp3"
+        }
+      },
+      {
+        "format": "I–ิE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "วิ่ง",
+          "meaning": "To run",
+          "audioFile": "audio/word/to_run.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อี",
+    "audioFile": "audio/vowel/sara_ii.mp3",
+    "soundFile": "audio/vowel/ii.mp3",
+    "writingForms": [
+      {
+        "format": "I–ี",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "สี",
+          "meaning": "Color",
+          "audioFile": "audio/word/color.mp3"
+        }
+      },
+      {
+        "format": "I–ีE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ปีน",
+          "meaning": "To climb",
+          "audioFile": "audio/word/to_climb.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "อึ",
+    "audioFile": "audio/vowel/sara_eu.mp3",
+    "soundFile": "audio/vowel/eu.mp3",
+    "writingForms": [
+      {
+        "format": "I–ึE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "บึง",
+          "meaning": "Swamp",
+          "audioFile": "audio/word/swamp.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อื",
+    "audioFile": "audio/vowel/sara_ueu.mp3",
+    "soundFile": "audio/vowel/euu.mp3",
+    "writingForms": [
+      {
+        "format": "I–ื",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "มือ",
+          "meaning": "Hand",
+          "audioFile": "audio/word/hand.mp3"
+        }
+      },
+      {
+        "format": "I–ืE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ยืน",
+          "meaning": "To stand",
+          "audioFile": "audio/word/to_stand.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "อุ",
+    "audioFile": "audio/vowel/sara_u.mp3",
+    "soundFile": "audio/vowel/u.mp3",
+    "writingForms": [
+      {
+        "format": "I–ุ",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "สุขา",
+          "meaning": "Restroom",
+          "audioFile": "audio/word/restroom.mp3"
+        }
+      },
+      {
+        "format": "I–ุE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "พุทธ",
+          "meaning": "Bouddha",
+          "audioFile": "audio/word/bouddha.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อู",
+    "audioFile": "audio/vowel/sara_uu.mp3",
+    "soundFile": "audio/vowel/uu.mp3",
+    "writingForms": [
+      {
+        "format": "I–ู",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "หู",
+          "meaning": "Ear",
+          "audioFile": "audio/word/ear.mp3"
+        }
+      },
+      {
+        "format": "I–ูE",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ผูก",
+          "meaning": "To tie",
+          "audioFile": "audio/word/to_tie.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เอะ",
+    "audioFile": "audio/vowel/sara_e.mp3",
+    "soundFile": "audio/vowel/e.mp3",
+    "writingForms": [
+      {
+        "format": "เIะ",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เกะกะ ",
+          "meaning": "Disorderly",
+          "audioFile": "audio/word/disorderly.mp3"
+        }
+      },
+      {
+        "format": "เI–็E",
+        "accentIndicator": "  * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เผ็ด",
+          "meaning": "Spicy",
+          "audioFile": "audio/word/spicy.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "เอ",
+    "audioFile": "audio/vowel/sara_eh.mp3",
+    "soundFile": "audio/vowel/eh.mp3",
+    "writingForms": [
+      {
+        "format": "เI",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เวลา",
+          "meaning": "Time",
+          "audioFile": "audio/word/time.mp3"
+        }
+      },
+      {
+        "format": "เIE",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เณร",
+          "meaning": "Novice monk",
+          "audioFile": "audio/word/novice_monk.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เเอะ",
+    "audioFile": "audio/vowel/sara_ae.mp3",
+    "soundFile": "audio/vowel/ae.mp3",
+    "writingForms": [
+      {
+        "format": "เเIะ",
+        "accentIndicator": "    ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เเกะ",
+          "meaning": "Sheep",
+          "audioFile": "audio/word/sheep.mp3"
+        }
+      },
+      {
+        "format": "เเI–็E",
+        "accentIndicator": "   * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "แช็ก",
+          "meaning": "Cigarette lighter",
+          "audioFile": "audio/word/cigarette_lighter.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "เเอ",
+    "audioFile": "audio/vowel/sara_aae.mp3",
+    "soundFile": "audio/vowel/aae.mp3",
+    "writingForms": [
+      {
+        "format": "เเI",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "แม่",
+          "meaning": "Mother",
+          "audioFile": "audio/word/mother.mp3"
+        }
+      },
+      {
+        "format": "เเIE",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "แขก",
+          "meaning": "Guest",
+          "audioFile": "audio/word/guest.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เอียะ",
+    "audioFile": "audio/vowel/sara_ia.mp3",
+    "soundFile": "audio/vowel/ia.mp3",
+    "writingForms": [
+      {
+        "format": "เI–ีย",
+        "accentIndicator": "  *  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เผียะ",
+          "meaning": "Sound of slapping",
+          "audioFile": ""
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "เอีย",
+    "audioFile": "audio/vowel/sara_iia.mp3",
+    "soundFile": "audio/vowel/iia.mp3",
+    "writingForms": [
+      {
+        "format": "เI–ีย",
+        "accentIndicator": "  * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เสียใจ",
+          "meaning": "Sorry",
+          "audioFile": "audio/word/sorry.mp3"
+        }
+      },
+      {
+        "format": "เI–ียE",
+        "accentIndicator": "  *  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เรียน",
+          "meaning": "To study",
+          "audioFile": "audio/word/to_study.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เอือะ",
+    "audioFile": "audio/vowel/sara_eua.mp3",
+    "soundFile": "audio/vowel/eua.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "เอือ",
+    "audioFile": "audio/vowel/sara_euua.mp3",
+    "soundFile": "audio/vowel/euua.mp3",
+    "writingForms": [
+      {
+        "format": "เI–ือ",
+        "accentIndicator": "  * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เสือ",
+          "meaning": "Tiger",
+          "audioFile": "audio/word/tiger.mp3"
+        }
+      },
+      {
+        "format": "เI–ือE",
+        "accentIndicator": "  *  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เลือก",
+          "meaning": "To choose",
+          "audioFile": "audio/word/to_choose.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "อัวะ",
+    "audioFile": "audio/vowel/sara_ua.mp3",
+    "soundFile": "audio/vowel/ua.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อัว",
+    "audioFile": "audio/vowel/sara_uua.mp3",
+    "soundFile": "audio/vowel/uua.mp3",
+    "writingForms": [
+      {
+        "format": "I–ัว",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "หัว",
+          "meaning": "Head",
+          "audioFile": "audio/word/head.mp3"
+        }
+      },
+      {
+        "format": "I-่วE",
+        "accentIndicator": " *  ",
+        "note": "When followed by an ending consonant, the vowel is written with a -่ (maai aehk).",
+        "exampleWord": {
+          "thai": "ง่วง",
+          "meaning": "Sleepy",
+          "audioFile": "audio/word/sleepy.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "โอะ",
+    "audioFile": "audio/vowel/sara_o.mp3",
+    "soundFile": "audio/vowel/o.mp3",
+    "writingForms": [
+      {
+        "format": "โIะ",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "โละ",
+          "meaning": "Dump",
+          "audioFile": ""
+        }
+      },
+      {
+        "format": "IE",
+        "accentIndicator": "  ",
+        "note": "The vowel 'โอะ' is implied and not written when a word contains only an initial and an ending.",
+        "exampleWord": {
+          "thai": "คน",
+          "meaning": "Person",
+          "audioFile": "audio/word/person.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "โอ",
+    "audioFile": "audio/vowel/sara_oe.mp3",
+    "soundFile": "audio/vowel/oe.mp3",
+    "writingForms": [
+      {
+        "format": "โI",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "โมโห",
+          "meaning": "Angry",
+          "audioFile": "audio/word/angry.mp3"
+        }
+      },
+      {
+        "format": "โIE",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "โรง",
+          "meaning": "Building",
+          "audioFile": "audio/word/building.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เอาะ",
+    "audioFile": "audio/vowel/sara_aw.mp3",
+    "soundFile": "audio/vowel/aw.mp3",
+    "writingForms": [
+      {
+        "format": "เIาะ",
+        "accentIndicator": "    ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เคาะ",
+          "meaning": "To knock",
+          "audioFile": "audio/word/to_knock.mp3"
+        }
+      },
+      {
+        "format": "I-็",
+        "accentIndicator": " *",
+        "note": "",
+        "exampleWord": {
+          "thai": "ก็",
+          "meaning": "Also, too",
+          "audioFile": "audio/word/also.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "ออ",
+    "audioFile": "audio/vowel/sara_aaw.mp3",
+    "soundFile": "audio/vowel/aaw.mp3",
+    "writingForms": [
+      {
+        "format": "Iอ",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "พ่อ",
+          "meaning": "Father",
+          "audioFile": "audio/word/father.mp3"
+        }
+      },
+      {
+        "format": "IอE",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "นอน",
+          "meaning": "To sleep",
+          "audioFile": "audio/word/to_sleep.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Short",
+    "thaiScript": "เออะ",
+    "audioFile": "audio/vowel/sara_er.mp3",
+    "soundFile": "audio/vowel/er.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "เออ",
+    "audioFile": "audio/vowel/sara_eer.mp3",
+    "soundFile": "audio/vowel/eer.mp3",
+    "writingForms": [
+      {
+        "format": "เIอ",
+        "accentIndicator": "   ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เบอร์",
+          "meaning": "Number",
+          "audioFile": "audio/word/number.mp3"
+        }
+      },
+      {
+        "format": "เI-ิE",
+        "accentIndicator": "  * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "เดิน",
+          "meaning": "To walk",
+          "audioFile": "audio/word/to_walk.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Long",
+    "thaiScript": "อำ",
+    "audioFile": "audio/vowel/sara_um.mp3",
+    "soundFile": "audio/vowel/um.mp3",
+    "writingForms": [
+      {
+        "format": "I-ํา",
+        "accentIndicator": " * ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ทำ",
+          "meaning": "To do, to make",
+          "audioFile": "audio/word/to_do.mp3"
+        }
+      },
+      {
+        "format": "I-ําE",
+        "accentIndicator": " *  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "น้ำ",
+          "meaning": "Water",
+          "audioFile": "audio/word/water.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ใอ",
+    "audioFile": "audio/vowel/sara_ai_mai_muan.mp3",
+    "soundFile": "audio/vowel/ai_mai_muan.mp3",
+    "writingForms": [
+      {
+        "format": "ใI",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ใส่",
+          "meaning": "To put",
+          "audioFile": "audio/word/to_put.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ไอ",
+    "audioFile": "audio/vowel/sara_ai_mai_ma_lai.mp3",
+    "soundFile": "audio/vowel/ai_mai_ma_lai.mp3",
+    "writingForms": [
+      {
+        "format": "ไI",
+        "accentIndicator": "  ",
+        "note": "",
+        "exampleWord": {
+          "thai": "ไม่",
+          "meaning": "No, not",
+          "audioFile": "audio/word/no.mp3"
+        }
+      },
+      {
+        "format": "ไI",
+        "accentIndicator": "  ",
+        "note": "Usually short vowel",
+        "exampleWord": {
+          "thai": "ไม้",
+          "meaning": "Wood",
+          "audioFile": "audio/word/wood.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "เอา",
+    "audioFile": "audio/vowel/sara_ao.mp3",
+    "soundFile": "audio/vowel/ao.mp3",
+    "writingForms": [
+      {
+        "format": "เIา",
+        "accentIndicator": "   ",
+        "note": "Short version",
+        "exampleWord": {
+          "thai": "เรา",
+          "meaning": "We",
+          "audioFile": "audio/word/we.mp3"
+        }
+      },
+      {
+        "format": "Iาว",
+        "accentIndicator": "   ",
+        "note": "Long version",
+        "exampleWord": {
+          "thai": "ขาว",
+          "meaning": "White",
+          "audioFile": "audio/word/white.mp3"
+        }
+      }
+    ]
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ฤ",
+    "audioFile": "audio/vowel/sara_reu.mp3",
+    "soundFile": "audio/vowel/reu.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ฤๅ",
+    "audioFile": "audio/vowel/sara_reuu.mp3",
+    "soundFile": "audio/vowel/reuu.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ฦ",
+    "audioFile": "audio/vowel/sara_leu.mp3",
+    "soundFile": "audio/vowel/leu.mp3",
+    "writingForms": []
+  },
+  {
+    "vowelClass": "Special",
+    "thaiScript": "ฦๅ",
+    "audioFile": "audio/vowel/sara_leuu.mp3",
+    "soundFile": "audio/vowel/leuu.mp3",
+    "writingForms": []
+  }
+]

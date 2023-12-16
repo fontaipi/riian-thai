@@ -1,4 +1,4 @@
-package com.fontaipi.riianthai.ui.page.flashcard.component
+package com.fontaipi.riianthai.ui.page.flashcard.consonant.component
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

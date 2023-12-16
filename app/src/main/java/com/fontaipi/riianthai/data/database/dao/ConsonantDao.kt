@@ -24,6 +24,9 @@ interface ConsonantDao {
     @Query("SELECT * FROM consonant WHERE id = :id")
     fun getConsonantById(id: Long): Flow<PopulatedConsonant>
 
+    @Query("SELECT (SUM(count) * 1.0) / (COUNT(*) * 5) FROM consonant")
+    fun getFlashcardProgress(): Flow<Float>
+
     @Query("SELECT COUNT(*) FROM consonant")
     suspend fun countConsonants(): Int
 
