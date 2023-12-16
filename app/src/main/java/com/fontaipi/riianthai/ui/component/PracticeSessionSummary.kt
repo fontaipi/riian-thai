@@ -24,13 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.fontaipi.riianthai.ui.theme.Green3
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
-internal val Green10 = Color(0xFF00210B)
-internal val Green20 = Color(0xFF003919)
-internal val Green30 = Color(0xFF005227)
-internal val Green40 = Color(0xFF006D36)
-internal val Green80 = Color(0xFF0EE37C)
-internal val Green90 = Color(0xFF5AFF9D)
-
 @Composable
 fun PracticeSessionSummary(
     modifier: Modifier = Modifier,

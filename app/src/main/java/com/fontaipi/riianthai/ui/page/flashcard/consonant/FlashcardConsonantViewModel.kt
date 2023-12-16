@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fontaipi.riianthai.data.repository.ConsonantRepository
 import com.fontaipi.riianthai.model.Consonant
-import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.CardFace
+import com.fontaipi.riianthai.ui.component.CardFace
 import com.fontaipi.riianthai.ui.page.flashcard.consonant.navigation.FlashcardConsonantArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

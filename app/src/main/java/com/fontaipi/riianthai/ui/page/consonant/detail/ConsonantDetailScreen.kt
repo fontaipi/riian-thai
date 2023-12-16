@@ -53,7 +53,7 @@ import com.fontaipi.riianthai.ui.page.consonant.detail.component.DiphthongDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.EndingConsonantDialog
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.UpsertWordBottomSheet
-import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.PhoneticText
+import com.fontaipi.riianthai.ui.component.PhoneticText
 import com.fontaipi.riianthai.ui.theme.HighClassColor
 import com.fontaipi.riianthai.ui.theme.LowClassColor
 import com.fontaipi.riianthai.ui.theme.MidClassColor
