@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -23,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -49,6 +51,7 @@ import com.fontaipi.riianthai.ui.page.practice.navigation.navigateToPracticeGrap
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraph
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraphPattern
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceRoute
+import com.fontaipi.riianthai.ui.page.settings.SettingsRoute
 import com.fontaipi.riianthai.ui.page.settings.SettingsScreen
 import com.fontaipi.riianthai.ui.page.summary.SummaryScreen
 import com.fontaipi.riianthai.ui.page.tone.ToneMarksScreen
@@ -83,6 +86,9 @@ fun RiianThaiApp(
                 topBar = {
                     CenterAlignedTopAppBar(
                         title = scaffoldViewState.topAppBarState.title,
+                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                            containerColor = Color.Transparent
+                        ),
                         navigationIcon = {
                             if (appState.currentTopLevelDestination == null) {
                                 IconButton(
@@ -250,7 +256,7 @@ fun BottomNavHost(
         }
 
         composable(TopLevelDestination.SETTINGS.path) {
-            SettingsScreen()
+            SettingsRoute()
         }
     }
 }

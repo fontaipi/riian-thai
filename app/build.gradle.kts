@@ -75,6 +75,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+
     // Dagger - Hilt
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation)
