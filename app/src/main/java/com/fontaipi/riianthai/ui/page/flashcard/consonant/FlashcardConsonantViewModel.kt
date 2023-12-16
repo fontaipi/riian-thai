@@ -26,6 +26,7 @@ sealed class FlashcardConsonantState {
 data class FlashcardConsonantUiState(
     val selectedIndex: Int = 0,
     val cardFace: CardFace = CardFace.Front,
+    val wrongAnswerIds: Set<Long> = emptySet(),
 )
 
 @HiltViewModel
@@ -37,7 +38,7 @@ class FlashcardViewModel @Inject constructor(
 
     val flashcardConsonantState =
         consonantRepository.getConsonants(flashcardConsonantArgs.consonantClass).map {
-            FlashcardConsonantState.Success(it)
+            FlashcardConsonantState.Success(it.shuffled())
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -47,10 +48,6 @@ class FlashcardViewModel @Inject constructor(
     private val _flashcardConsonantUiState = MutableStateFlow(FlashcardConsonantUiState())
     val flashcardConsonantUiState = _flashcardConsonantUiState.asStateFlow()
 
-    fun restart() {
-        _flashcardConsonantUiState.update { it.copy(selectedIndex = 0, cardFace = CardFace.Front) }
-    }
-
     fun turnCard() {
         _flashcardConsonantUiState.update { it.copy(cardFace = it.cardFace.next()) }
     }
@@ -59,11 +56,12 @@ class FlashcardViewModel @Inject constructor(
         viewModelScope.launch {
             val state = flashcardConsonantState.first()
             if (state is FlashcardConsonantState.Success) {
-                if (_flashcardConsonantUiState.value.selectedIndex < state.consonants.size - 1) {
+                if (_flashcardConsonantUiState.value.selectedIndex < state.consonants.size) {
                     _flashcardConsonantUiState.update {
                         it.copy(
                             selectedIndex = it.selectedIndex + 1,
-                            cardFace = CardFace.Front
+                            cardFace = CardFace.Front,
+                            wrongAnswerIds = if (success) it.wrongAnswerIds else it.wrongAnswerIds + id
                         )
                     }
                     if (success) {

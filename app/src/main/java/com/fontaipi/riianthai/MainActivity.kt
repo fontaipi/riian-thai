@@ -23,10 +23,6 @@ import com.fontaipi.riianthai.data.database.dao.ConsonantDao
 import com.fontaipi.riianthai.data.database.dao.VowelDao
 import com.fontaipi.riianthai.data.database.dao.VowelFormDao
 import com.fontaipi.riianthai.data.database.dao.WordDao
-import com.fontaipi.riianthai.data.database.entity.ConsonantWordsCrossRef
-import com.fontaipi.riianthai.model.Consonant
-import com.fontaipi.riianthai.model.Vowel
-import com.fontaipi.riianthai.model.asEntity
 import com.fontaipi.riianthai.ui.page.settings.UserPreferencesState
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +31,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -80,39 +75,7 @@ class MainActivity : ComponentActivity() {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val consonantJsonString = assets.open("consonants.json").readBytes().decodeToString()
-            val consonants = Json.decodeFromString<List<Consonant>>(consonantJsonString)
 
-            val vowelJsonString = assets.open("vowels.json").readBytes().decodeToString()
-            val vowels = Json.decodeFromString<List<Vowel>>(vowelJsonString)
-
-            if (consonantDao.countConsonants() == 0) {
-                consonants.forEach { consonant ->
-                    val consonantId = consonantDao.upsertConsonant(consonant.asEntity())
-                    consonant.exampleWords.forEach {
-                        val wordId = wordDao.upsertWord(it.asEntity())
-                        consonantDao.insertOrIgnoreWordCrossRefEntity(
-                            ConsonantWordsCrossRef(
-                                consonantId = consonantId,
-                                wordId = wordId
-                            )
-                        )
-                    }
-                }
-            }
-
-            if (vowelDao.countVowels() == 0) {
-                vowels.forEach {
-                    val vowelId = vowelDao.upsertVowel(it.asEntity())
-                    it.writingForms.forEach { vowelForm ->
-                        val wordId = wordDao.upsertWord(vowelForm.exampleWord.asEntity())
-                        vowelFormDao.upsertVowelForm(
-                            vowelForm.asEntity(vowelId).copy(wordId = wordId)
-                        )
-                    }
-
-                }
-            }
         }
 
         enableEdgeToEdge()
@@ -125,7 +88,6 @@ class MainActivity : ComponentActivity() {
             // resolve whether or not to show dark theme using uiState, since it can be different
             // than the configuration's dark theme value based on the user preference.
             DisposableEffect(darkTheme) {
-                println("darkTheme: $darkTheme")
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.auto(
                         android.graphics.Color.TRANSPARENT,
@@ -165,7 +127,7 @@ private fun shouldDisableDynamicTheming(
 }
 
 /**
- * Returns `true` if dark theme should be used, as a function of the [uiState] and the
+ * Returns `true` if dark theme should be used, as a function of the [userPreferencesState] and the
  * current system context.
  */
 @Composable

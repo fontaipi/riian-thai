@@ -4,12 +4,16 @@ import android.media.MediaPlayer
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -17,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.fontaipi.riianthai.model.ConsonantClass
+import com.fontaipi.riianthai.ui.component.PracticeSessionSummary
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.FlashCard
 import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.PhoneticText
@@ -87,124 +92,242 @@ fun FlashcardConsonantScreen(
                     }
 
                     val progressAnimation by animateFloatAsState(
-                        targetValue = (flashcardConsonantUiState.selectedIndex + 1).toFloat() / flashcardConsonantState.consonants.size,
+                        targetValue = (flashcardConsonantUiState.selectedIndex + 1).toFloat() / (flashcardConsonantState.consonants.size),
                         animationSpec = tween(), label = "progressAnimation"
                     )
 
-                    LinearProgressIndicator(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(6.dp),
-                        progress = { progressAnimation },
-                        strokeCap = StrokeCap.Round
-                    )
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(20.dp)
-                    ) {
-                        FlashCard(
-                            cardFace = flashcardConsonantUiState.cardFace,
-                            onClick = turnCard,
-                            front = {
-                                card?.let {
-                                    Text(it.thai, style = MaterialTheme.typography.displayLarge)
-                                }
-                            },
-                            back = {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(12.dp),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
+                    if (flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size) {
+                        LinearProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(6.dp),
+                            progress = { progressAnimation },
+                            strokeCap = StrokeCap.Round
+                        )
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(20.dp)
+                        ) {
+                            FlashCard(
+                                cardFace = flashcardConsonantUiState.cardFace,
+                                onClick = turnCard,
+                                front = {
                                     card?.let {
-                                        if (it.picture.isNotEmpty()) {
-                                            AsyncImage(
-                                                model = "file:///android_asset/${it.picture}",
-                                                contentDescription = "",
-                                            )
-                                        }
-                                        Text(
-                                            text = "${it.associatedWord} (${it.meaning})",
-                                            style = MaterialTheme.typography.titleLarge
-                                        )
-                                        Column(
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
+                                        Text(it.thai, style = MaterialTheme.typography.displayLarge)
+                                    }
+                                },
+                                back = {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(12.dp),
+                                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        card?.let {
+                                            if (it.picture.isNotEmpty()) {
+                                                AsyncImage(
+                                                    model = "file:///android_asset/${it.picture}",
+                                                    contentDescription = "",
+                                                )
+                                            }
                                             Text(
-                                                text = it.thai,
-                                                style = MaterialTheme.typography.displayLarge
-                                            )
-                                            PhoneticText(
-                                                text = it.phonetic,
+                                                text = "${it.associatedWord} (${it.meaning})",
                                                 style = MaterialTheme.typography.titleLarge
                                             )
+                                            Column(
+                                                horizontalAlignment = Alignment.CenterHorizontally
+                                            ) {
+                                                Text(
+                                                    text = it.thai,
+                                                    style = MaterialTheme.typography.displayLarge
+                                                )
+                                                PhoneticText(
+                                                    text = it.phonetic,
+                                                    style = MaterialTheme.typography.titleLarge
+                                                )
+                                            }
+                                            FilledIconButton(
+                                                onClick = {
+                                                    coroutineScope.launch {
+                                                        val mediaPlayer = MediaPlayer()
+                                                        context.assets.openFd(it.audio).use { fd ->
+                                                            mediaPlayer.setDataSource(
+                                                                fd.fileDescriptor,
+                                                                fd.startOffset,
+                                                                fd.length
+                                                            )
+                                                            mediaPlayer.prepare()
+                                                            mediaPlayer.start()
+                                                        }
+                                                    }
+                                                },
+                                            ) {
+                                                Icon(
+                                                    imageVector = Icons.Rounded.PlayArrow,
+                                                    contentDescription = null
+                                                )
+                                            }
+                                            val color = when (it.consonantClass) {
+                                                ConsonantClass.Low -> LowClassColor
+                                                ConsonantClass.Mid -> MidClassColor
+                                                ConsonantClass.High -> HighClassColor
+                                            }
+                                            Box(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                contentAlignment = Alignment.CenterEnd
+                                            ) {
+                                                Tag(
+                                                    text = it.consonantClass.name,
+                                                    color = color
+                                                )
+                                            }
+
                                         }
-                                        FilledIconButton(
-                                            onClick = {
-                                                coroutineScope.launch {
-                                                    val mediaPlayer = MediaPlayer()
-                                                    context.assets.openFd(it.audio).use { fd ->
-                                                        mediaPlayer.setDataSource(
-                                                            fd.fileDescriptor,
-                                                            fd.startOffset,
-                                                            fd.length
-                                                        )
-                                                        mediaPlayer.prepare()
-                                                        mediaPlayer.start()
+                                    }
+                                }
+                            )
+                        }
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(24.dp),
+                        ) {
+                            FilledTonalIconButton(
+                                enabled = flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size,
+                                onClick = {
+                                    card?.let {
+                                        nextCard(it.id, false)
+                                    }
+                                }
+                            ) {
+                                Icon(imageVector = Icons.Rounded.Close, contentDescription = null)
+                            }
+                            FilledTonalIconButton(
+                                enabled = flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size,
+                                onClick = {
+                                    card?.let {
+                                        nextCard(it.id, true)
+                                    }
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.Check,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                    } else {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(24.dp),
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(
+                                        verticalArrangement = Arrangement.spacedBy((-10).dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Text(
+                                            text = "Congratulations",
+                                            style = MaterialTheme.typography.headlineMedium
+                                        )
+                                        Text(
+                                            text = "(เก่งมาก)",
+                                            style = MaterialTheme.typography.headlineLarge
+                                        )
+                                    }
+                                    Text(text = "🎉", style = MaterialTheme.typography.headlineLarge)
+                                }
+
+                                PracticeSessionSummary(
+                                    modifier = Modifier
+                                        .fillMaxWidth(0.5f)
+                                        .aspectRatio(1f),
+                                    progress = 1f - (flashcardConsonantUiState.wrongAnswerIds.size / flashcardConsonantState.consonants.size.toFloat())
+                                )
+                            }
+
+                            if (flashcardConsonantUiState.wrongAnswerIds.isNotEmpty()) {
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Text(
+                                        text = "Your mistakes",
+                                        style = MaterialTheme.typography.titleLarge
+                                    )
+                                    LazyColumn(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        items(flashcardConsonantState.consonants.filter {
+                                            flashcardConsonantUiState.wrongAnswerIds.contains(
+                                                it.id
+                                            )
+                                        }) {
+                                            Card(
+                                                onClick = {
+                                                    coroutineScope.launch {
+                                                        val mediaPlayer = MediaPlayer()
+                                                        context.assets.openFd(it.audio)
+                                                            .use { fd ->
+                                                                mediaPlayer.setDataSource(
+                                                                    fd.fileDescriptor,
+                                                                    fd.startOffset,
+                                                                    fd.length
+                                                                )
+                                                                mediaPlayer.prepare()
+                                                                mediaPlayer.start()
+                                                            }
                                                     }
                                                 }
-                                            },
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Rounded.PlayArrow,
-                                                contentDescription = null
-                                            )
+                                            ) {
+                                                Row(
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(10.dp),
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    horizontalArrangement = Arrangement.SpaceBetween
+                                                ) {
+                                                    Row(
+                                                        horizontalArrangement = Arrangement.spacedBy(
+                                                            8.dp
+                                                        )
+                                                    ) {
+                                                        AsyncImage(
+                                                            modifier = Modifier
+                                                                .size(72.dp)
+                                                                .clip(MaterialTheme.shapes.medium),
+                                                            model = "file:///android_asset/${it.picture}",
+                                                            contentDescription = "",
+                                                        )
+                                                        Column {
+                                                            Text(
+                                                                text = it.thai,
+                                                                style = MaterialTheme.typography.headlineLarge
+                                                            )
+                                                            Text(
+                                                                text = it.meaning,
+                                                                style = MaterialTheme.typography.titleMedium
+                                                            )
+                                                        }
+                                                    }
+                                                    Icon(
+                                                        imageVector = Icons.AutoMirrored.Rounded.VolumeUp,
+                                                        contentDescription = null
+                                                    )
+                                                }
+                                            }
                                         }
-                                        val color = when (it.consonantClass) {
-                                            ConsonantClass.Low -> LowClassColor
-                                            ConsonantClass.Mid -> MidClassColor
-                                            ConsonantClass.High -> HighClassColor
-                                        }
-                                        Box(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            contentAlignment = Alignment.CenterEnd
-                                        ) {
-                                            Tag(
-                                                text = it.consonantClass.name,
-                                                color = color
-                                            )
-                                        }
-
                                     }
                                 }
                             }
-                        )
-                    }
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        FilledTonalIconButton(
-                            enabled = flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size - 1,
-                            onClick = {
-                                card?.let {
-                                    nextCard(it.id, false)
-                                }
-                            }
-                        ) {
-                            Icon(imageVector = Icons.Rounded.Close, contentDescription = null)
-                        }
-                        FilledTonalIconButton(
-                            enabled = flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size - 1,
-                            onClick = {
-                                card?.let {
-                                    nextCard(it.id, true)
-                                }
-                            }
-                        ) {
-                            Icon(imageVector = Icons.Rounded.Check, contentDescription = null)
                         }
                     }
                 }

@@ -10,4 +10,5 @@ interface ConsonantRepository {
     fun getFlashcardProgress(): Flow<Float>
     suspend fun incrementCount(id: Long)
     suspend fun resetAllCounts()
+    suspend fun loadJsonData()
 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface VowelRepository {
     fun getVowels(): Flow<List<Vowel>>
     fun getVowel(id: Long): Flow<Vowel>
-
+    suspend fun loadJsonData()
 }
