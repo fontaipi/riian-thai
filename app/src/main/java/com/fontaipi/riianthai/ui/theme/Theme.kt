@@ -10,18 +10,38 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme()
-
 private val LightColorScheme = lightColorScheme()
 
-val ColorScheme.successContainer: Color
-    get() = SuccessContainerLight
+@Immutable
+data class AlertTheme(
+    val success: Color = Color.Unspecified,
+    val onSuccess: Color = Color.Unspecified,
+    val successContainer: Color = Color.Unspecified,
+    val onSuccessContainer: Color = Color.Unspecified,
+)
 
-val ColorScheme.onSuccessContainer: Color
-    get() = OnSuccessContainerLight
+val LocalAlertTheme = staticCompositionLocalOf { AlertTheme() }
+
+val LightAlertTheme = AlertTheme(
+    success = SuccessLight,
+    onSuccess = OnSuccessLight,
+    successContainer = SuccessContainerLight,
+    onSuccessContainer = OnSuccessContainerLight,
+)
+
+val DarkAlertTheme = AlertTheme(
+    success = SuccessDark,
+    onSuccess = OnSuccessDark,
+    successContainer = SuccessContainerDark,
+    onSuccessContainer = OnSuccessContainerDark,
+)
 
 @Composable
 fun RiianThaiTheme(
@@ -40,11 +60,17 @@ fun RiianThaiTheme(
         else -> if (darkTheme) DarkColorScheme else LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val alertTheme = if (darkTheme) DarkAlertTheme else LightAlertTheme
+
+    CompositionLocalProvider(
+        LocalAlertTheme provides alertTheme,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
 
 @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)

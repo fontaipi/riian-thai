@@ -28,6 +28,19 @@ class VowelRepositoryImpl @Inject constructor(
         return vowelDao.getVowel(id).map { it.asExternalModel() }
     }
 
+    override fun getNotLearnedVowels(limit: Int): Flow<List<Vowel>> {
+        return vowelDao.getNotLearnedVowel(limit)
+            .map { it.map { vowel -> vowel.asExternalModel() } }
+    }
+
+    override fun getFlashcardProgress(): Flow<Float> {
+        return vowelFormDao.getFlashcardProgress()
+    }
+
+    override suspend fun incrementVowelFormCount(id: Long) = withContext(Dispatchers.IO) {
+        vowelFormDao.incrementCount(id)
+    }
+
     override suspend fun loadJsonData() = withContext(Dispatchers.IO) {
         val vowelJsonString =
             application.applicationContext.assets.open("vowels.json").readBytes().decodeToString()

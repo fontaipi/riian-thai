@@ -6,6 +6,7 @@ import androidx.room.Transaction
 import androidx.room.Upsert
 import com.fontaipi.riianthai.data.database.entity.PopulatedVowel
 import com.fontaipi.riianthai.data.database.entity.VowelEntity
+import com.fontaipi.riianthai.data.database.entity.VowelFormEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,6 +18,10 @@ interface VowelDao {
     @Transaction
     @Query("SELECT * FROM vowel WHERE id = :id")
     fun getVowel(id: Long): Flow<PopulatedVowel>
+
+    @Transaction
+    @Query("SELECT * FROM vowel ORDER BY RANDOM() LIMIT :limit")
+    fun getNotLearnedVowel(limit: Int): Flow<List<PopulatedVowel>>
 
     @Upsert
     suspend fun upsertVowel(vowel: VowelEntity): Long

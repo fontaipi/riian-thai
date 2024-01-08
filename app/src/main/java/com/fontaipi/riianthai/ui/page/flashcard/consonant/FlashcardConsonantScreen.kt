@@ -18,14 +18,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.fontaipi.riianthai.model.Consonant
-import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.ui.component.FlashcardSession
 import com.fontaipi.riianthai.ui.component.FlashcardSessionSuccessRate
-import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
-import com.fontaipi.riianthai.ui.component.PhoneticText
-import com.fontaipi.riianthai.ui.theme.HighClassColor
-import com.fontaipi.riianthai.ui.theme.LowClassColor
-import com.fontaipi.riianthai.ui.theme.MidClassColor
+import com.fontaipi.riianthai.ui.page.flashcard.consonant.component.BackConsonantFlashcard
 import kotlinx.coroutines.launch
 
 @Composable
@@ -37,7 +32,7 @@ fun FlashcardConsonantRoute(
     val flashcardConsonantUiState by viewModel.flashcardConsonantUiState.collectAsStateWithLifecycle()
     FlashcardConsonantScreen(
         flashcardConsonantState = flashcardConsonantState,
-        flashcardConsonantUiState = flashcardConsonantUiState,
+        flashcardUiState = flashcardConsonantUiState,
         turnCard = viewModel::turnCard,
         nextCard = viewModel::nextCard,
         onBackClick = onBackClick,
@@ -48,7 +43,7 @@ fun FlashcardConsonantRoute(
 @Composable
 fun FlashcardConsonantScreen(
     flashcardConsonantState: FlashcardConsonantState,
-    flashcardConsonantUiState: FlashcardConsonantUiState,
+    flashcardUiState: FlashcardUiState,
     turnCard: () -> Unit,
     nextCard: (Long, Boolean) -> Unit,
     onBackClick: () -> Unit,
@@ -79,93 +74,28 @@ fun FlashcardConsonantScreen(
         ) {
             when (flashcardConsonantState) {
                 is FlashcardConsonantState.Success -> {
-                    val context = LocalContext.current
-                    val coroutineScope = rememberCoroutineScope()
-                    val card by remember(flashcardConsonantUiState.selectedIndex) {
+                    val card by remember(flashcardUiState.selectedIndex) {
                         derivedStateOf {
                             flashcardConsonantState.consonants.getOrNull(
-                                flashcardConsonantUiState.selectedIndex
+                                flashcardUiState.selectedIndex
                             )
                         }
                     }
 
-                    if (flashcardConsonantUiState.selectedIndex < flashcardConsonantState.consonants.size) {
+                    if (flashcardUiState.selectedIndex < flashcardConsonantState.consonants.size) {
                         FlashcardSession(
-                            progress = (flashcardConsonantUiState.selectedIndex + 1).toFloat() / (flashcardConsonantState.consonants.size),
-                            cardFace = flashcardConsonantUiState.cardFace,
+                            progress = (flashcardUiState.selectedIndex + 1).toFloat() / (flashcardConsonantState.consonants.size),
+                            cardFace = flashcardUiState.cardFace,
                             front = {
                                 card?.let {
                                     Text(it.thai, style = MaterialTheme.typography.displayLarge)
                                 }
                             },
                             back = {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(12.dp),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    card?.let {
-                                        if (it.picture.isNotEmpty()) {
-                                            AsyncImage(
-                                                model = "file:///android_asset/${it.picture}",
-                                                contentDescription = "",
-                                            )
-                                        }
-                                        Text(
-                                            text = "${it.associatedWord} (${it.meaning})",
-                                            style = MaterialTheme.typography.titleLarge
-                                        )
-                                        Column(
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            Text(
-                                                text = it.thai,
-                                                style = MaterialTheme.typography.displayLarge
-                                            )
-                                            PhoneticText(
-                                                text = it.phonetic,
-                                                style = MaterialTheme.typography.titleLarge
-                                            )
-                                        }
-                                        FilledIconButton(
-                                            onClick = {
-                                                coroutineScope.launch {
-                                                    val mediaPlayer = MediaPlayer()
-                                                    context.assets.openFd(it.audio).use { fd ->
-                                                        mediaPlayer.setDataSource(
-                                                            fd.fileDescriptor,
-                                                            fd.startOffset,
-                                                            fd.length
-                                                        )
-                                                        mediaPlayer.prepare()
-                                                        mediaPlayer.start()
-                                                    }
-                                                }
-                                            },
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Rounded.PlayArrow,
-                                                contentDescription = null
-                                            )
-                                        }
-                                        val color = when (it.consonantClass) {
-                                            ConsonantClass.Low -> LowClassColor
-                                            ConsonantClass.Mid -> MidClassColor
-                                            ConsonantClass.High -> HighClassColor
-                                        }
-                                        Box(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            contentAlignment = Alignment.CenterEnd
-                                        ) {
-                                            Tag(
-                                                text = it.consonantClass.name,
-                                                color = color
-                                            )
-                                        }
-
-                                    }
+                                card?.let {
+                                    BackConsonantFlashcard(
+                                        consonant = it
+                                    )
                                 }
                             },
                             nextCard = {
@@ -177,8 +107,8 @@ fun FlashcardConsonantScreen(
                         )
                     } else {
                         FlashcardConsonantSuccessSection(
-                            wrongAnswerConsonants = flashcardConsonantState.consonants.filter { it.id in flashcardConsonantUiState.wrongAnswerIds },
-                            successRate = 1f - (flashcardConsonantUiState.wrongAnswerIds.size / flashcardConsonantState.consonants.size.toFloat())
+                            wrongAnswerConsonants = flashcardConsonantState.consonants.filter { it.id in flashcardUiState.wrongAnswerIds },
+                            successRate = 1f - (flashcardUiState.wrongAnswerIds.size / flashcardConsonantState.consonants.size.toFloat())
                         )
                     }
                 }

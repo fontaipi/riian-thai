@@ -30,5 +30,6 @@ data class VowelFormEntity(
     val vowelId: Long,
     @ColumnInfo(name = "word_id")
     val wordId: Long,
-    val note: String
+    val note: String,
+    val count: Int,
 )

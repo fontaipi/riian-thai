@@ -48,6 +48,7 @@ import com.fontaipi.riianthai.model.Vowel
 import com.fontaipi.riianthai.model.VowelClass
 import com.fontaipi.riianthai.model.VowelForm
 import com.fontaipi.riianthai.model.Word
+import com.fontaipi.riianthai.ui.component.VowelFormText
 import com.fontaipi.riianthai.ui.page.consonant.detail.component.Tag
 import com.fontaipi.riianthai.ui.page.vowel.detail.component.VowelFormColorCode
 import com.fontaipi.riianthai.ui.theme.FinalConsonantColor
@@ -294,34 +295,6 @@ fun VowelDetailScreen(
         }
     }
 
-}
-
-@Composable
-fun VowelFormText(
-    modifier: Modifier = Modifier,
-    vowelForm: VowelForm,
-    style: TextStyle = MaterialTheme.typography.headlineLarge
-) {
-    val annotatedString = buildAnnotatedString {
-        vowelForm.format.forEachIndexed { index, char ->
-            when {
-                char == 'I' -> withStyle(style = SpanStyle(color = InitialConsonantColor)) {
-                    append(
-                        "-"
-                    )
-                }
-
-                char == 'E' -> withStyle(style = SpanStyle(color = FinalConsonantColor)) { append("-") }
-                index < vowelForm.accentIndicator.length && vowelForm.accentIndicator[index] == '*' -> {}
-                else -> withStyle(style = SpanStyle(color = VowelColor)) { append(char.toString()) }
-            }
-            if (index < vowelForm.format.lastIndex) {
-                withStyle(style = SpanStyle(fontSize = 12.sp)) { append(" ") }
-            }
-        }
-    }
-
-    BasicText(modifier = modifier, text = annotatedString, style = style)
 }
 
 @Preview

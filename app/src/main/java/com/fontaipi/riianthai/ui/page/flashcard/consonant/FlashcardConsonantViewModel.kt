@@ -23,7 +23,7 @@ sealed class FlashcardConsonantState {
     data object Loading : FlashcardConsonantState()
 }
 
-data class FlashcardConsonantUiState(
+data class FlashcardUiState(
     val selectedIndex: Int = 0,
     val cardFace: CardFace = CardFace.Front,
     val wrongAnswerIds: Set<Long> = emptySet(),
@@ -32,32 +32,31 @@ data class FlashcardConsonantUiState(
 @HiltViewModel
 class FlashcardViewModel @Inject constructor(
     private val consonantRepository: ConsonantRepository,
-    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val flashcardConsonantArgs = FlashcardConsonantArgs(savedStateHandle)
+    private val _flashcardConsonantState =
+        MutableStateFlow<FlashcardConsonantState>(FlashcardConsonantState.Loading)
+    val flashcardConsonantState = _flashcardConsonantState.asStateFlow()
 
-    val flashcardConsonantState =
-        consonantRepository.getConsonants(flashcardConsonantArgs.consonantClass).map {
-            FlashcardConsonantState.Success(it.shuffled())
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = FlashcardConsonantState.Loading
-        )
+    private val _flashcardUiState = MutableStateFlow(FlashcardUiState())
+    val flashcardConsonantUiState = _flashcardUiState.asStateFlow()
 
-    private val _flashcardConsonantUiState = MutableStateFlow(FlashcardConsonantUiState())
-    val flashcardConsonantUiState = _flashcardConsonantUiState.asStateFlow()
+    init {
+        viewModelScope.launch {
+            val consonants = consonantRepository.getNotLearnedConsonants().first()
+            _flashcardConsonantState.update { FlashcardConsonantState.Success(consonants) }
+        }
+    }
 
     fun turnCard() {
-        _flashcardConsonantUiState.update { it.copy(cardFace = it.cardFace.next()) }
+        _flashcardUiState.update { it.copy(cardFace = it.cardFace.next()) }
     }
 
     fun nextCard(id: Long, success: Boolean) {
         viewModelScope.launch {
             val state = flashcardConsonantState.first()
             if (state is FlashcardConsonantState.Success) {
-                if (_flashcardConsonantUiState.value.selectedIndex < state.consonants.size) {
-                    _flashcardConsonantUiState.update {
+                if (_flashcardUiState.value.selectedIndex < state.consonants.size) {
+                    _flashcardUiState.update {
                         it.copy(
                             selectedIndex = it.selectedIndex + 1,
                             cardFace = CardFace.Front,

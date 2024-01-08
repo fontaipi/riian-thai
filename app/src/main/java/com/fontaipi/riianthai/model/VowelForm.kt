@@ -9,7 +9,8 @@ data class VowelForm(
     val format: String,
     val accentIndicator: String,
     val exampleWord: Word,
-    val note: String
+    val note: String,
+    val count: Int = 0,
 )
 
 fun VowelForm.asEntity(vowelId: Long): VowelFormEntity =
@@ -19,5 +20,6 @@ fun VowelForm.asEntity(vowelId: Long): VowelFormEntity =
         accentIndicator = accentIndicator,
         vowelId = vowelId,
         wordId = exampleWord.id,
-        note = note
+        note = note,
+        count = count
     )

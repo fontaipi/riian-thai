@@ -21,6 +21,10 @@ interface ConsonantDao {
     @Query("SELECT * FROM consonant WHERE consonant_class = :filter")
     fun getConsonants(filter: String): Flow<List<PopulatedConsonant>>
 
+    @Transaction
+    @Query("SELECT * FROM consonant WHERE count < 10 ORDER BY RANDOM() LIMIT :limit")
+    fun getNotLearnedConsonant(limit: Int): Flow<List<PopulatedConsonant>>
+
     @Query("SELECT * FROM consonant WHERE id = :id")
     fun getConsonantById(id: Long): Flow<PopulatedConsonant>
 

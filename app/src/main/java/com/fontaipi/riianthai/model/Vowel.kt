@@ -35,3 +35,23 @@ fun Vowel.asEntity(): VowelEntity =
         soundFile = soundFile,
         note = note
     )
+
+val sampleVowel = Vowel(
+    thaiScript = "อา",
+    vowelClass = VowelClass.Long,
+    soundType = SoundType.Monophthong,
+    audioFile = "",
+    soundFile = "",
+    writingForms = listOf(
+        VowelForm(
+            format = "เIา",
+            accentIndicator = "   ",
+            note = "This is a note, with some content",
+            exampleWord = Word(
+                thai = "เรา",
+                meaning = "We",
+                audioFile = "audio/word/we.mp3"
+            )
+        )
+    ),
+)

@@ -37,6 +37,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navOptions
 import com.fontaipi.riianthai.model.ConsonantClass
+import com.fontaipi.riianthai.model.VowelClass
+import com.fontaipi.riianthai.model.sampleVowel
 import com.fontaipi.riianthai.ui.component.BottomAppBar
 import com.fontaipi.riianthai.ui.component.slideInVerticallyComposable
 import com.fontaipi.riianthai.ui.page.consonant.detail.ConsonantDetailRoute
@@ -47,6 +49,9 @@ import com.fontaipi.riianthai.ui.page.learn.navigation.learnGraph
 import com.fontaipi.riianthai.ui.page.learn.navigation.learnRoute
 import com.fontaipi.riianthai.ui.page.learn.navigation.navigateToLearnGraph
 import com.fontaipi.riianthai.ui.page.flashcard.selection.FlashcardsRoute
+import com.fontaipi.riianthai.ui.page.flashcard.vowel.FlashcardVowelRoute
+import com.fontaipi.riianthai.ui.page.flashcard.vowel.FlashcardVowelScreen
+import com.fontaipi.riianthai.ui.page.flashcard.vowel.VowelFormFlashcard
 import com.fontaipi.riianthai.ui.page.practice.navigation.navigateToPracticeGraph
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraph
 import com.fontaipi.riianthai.ui.page.practice.navigation.practiceGraphPattern
@@ -154,6 +159,9 @@ fun RiianThaiApp(
                             appState.navController.navigate("consonants/${it}")
                         },
                         navigateToFlashcardConsonant = appState.navController::navigateToFlashcardConsonant,
+                        navigateToFlashcardVowel = {
+                            appState.navController.navigate("flashcardVowel")
+                        },
                     ) {
                         appState.navController.navigateToVowel(it)
                     }
@@ -166,6 +174,14 @@ fun RiianThaiApp(
                 appState.navController.popBackStack()
             }
         )
+
+        slideInVerticallyComposable("flashcardVowel") {
+            FlashcardVowelRoute(
+                onBackClick = {
+                    appState.navController.popBackStack()
+                }
+            )
+        }
 
         slideInVerticallyComposable("summary") {
             SummaryScreen(
@@ -203,6 +219,7 @@ fun BottomNavHost(
     navController: NavHostController,
     updateScaffoldViewState: (ScaffoldViewState) -> Unit,
     navigateToFlashcardConsonant: (ConsonantClass?) -> Unit,
+    navigateToFlashcardVowel: (VowelClass?) -> Unit,
     navigateToConsonantDetail: (Long) -> Unit,
     navigateToVowelDetail: (Long) -> Unit,
 ) {
@@ -221,7 +238,8 @@ fun BottomNavHost(
         ) {
             composable("flashcards") {
                 FlashcardsRoute(
-                    navigateToFlashcardConsonant = navigateToFlashcardConsonant
+                    navigateToFlashcardConsonant = navigateToFlashcardConsonant,
+                    navigateToFlashcardVowel = navigateToFlashcardVowel
                 )
             }
             composable("vocabulary") {

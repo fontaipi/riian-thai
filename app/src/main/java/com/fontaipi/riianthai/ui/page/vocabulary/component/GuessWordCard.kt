@@ -14,10 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.fontaipi.riianthai.ui.theme.Green1
+import com.fontaipi.riianthai.ui.theme.LocalAlertTheme
 import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
-import com.fontaipi.riianthai.ui.theme.onSuccessContainer
-import com.fontaipi.riianthai.ui.theme.successContainer
 
 enum class GuessWordCardState {
     Correct,
@@ -32,10 +30,13 @@ fun GuessWordCard(
     state: GuessWordCardState = GuessWordCardState.Neutral,
     onClick: () -> Unit
 ) {
+    val successContainer = LocalAlertTheme.current.successContainer
+    val onSuccessContainer = LocalAlertTheme.current.onSuccessContainer
+
     val (containerColor, contentColor) = when (state) {
-        GuessWordCardState.Correct -> MaterialTheme.colorScheme.successContainer to MaterialTheme.colorScheme.onSuccessContainer
-            GuessWordCardState.Incorrect -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
-            GuessWordCardState.Neutral -> MaterialTheme.colorScheme.surface to MaterialTheme.colorScheme.onSurface
+        GuessWordCardState.Correct -> successContainer to onSuccessContainer
+        GuessWordCardState.Incorrect -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.onErrorContainer
+        GuessWordCardState.Neutral -> MaterialTheme.colorScheme.surface to MaterialTheme.colorScheme.onSurface
     }
     OutlinedCard(
         modifier = modifier,
@@ -46,7 +47,9 @@ fun GuessWordCard(
         )
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
             Text(text = text, style = MaterialTheme.typography.headlineSmall)

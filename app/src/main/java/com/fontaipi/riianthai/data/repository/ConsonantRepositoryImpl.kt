@@ -35,6 +35,11 @@ class ConsonantRepositoryImpl @Inject constructor(
             .map { it.asExternalModel() }
     }
 
+    override fun getNotLearnedConsonants(limit: Int): Flow<List<Consonant>> {
+        return consonantDao.getNotLearnedConsonant(limit)
+            .map { it.map { consonant -> consonant.asExternalModel() } }
+    }
+
     override fun getFlashcardProgress(): Flow<Float> {
         return consonantDao.getFlashcardProgress()
     }

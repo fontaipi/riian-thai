@@ -2,19 +2,35 @@ package com.fontaipi.riianthai.ui.page.flashcard.selection
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fontaipi.riianthai.model.ConsonantClass
 import com.fontaipi.riianthai.model.VowelClass
 import com.fontaipi.riianthai.ui.page.practice.component.FlashcardCategoryCard
@@ -25,16 +41,23 @@ import com.fontaipi.riianthai.ui.theme.RiianThaiTheme
 
 @Composable
 fun FlashcardsRoute(
+    viewModel: FlashcardsViewModel = hiltViewModel(),
     navigateToFlashcardConsonant: (ConsonantClass?) -> Unit,
+    navigateToFlashcardVowel: (VowelClass?) -> Unit,
 ) {
+    val flashcardsState by viewModel.flashcardsState.collectAsStateWithLifecycle()
     FlashcardsScreen(
+        flashcardsState = flashcardsState,
         navigateToFlashcardConsonant = navigateToFlashcardConsonant,
+        navigateToFlashcardVowel = navigateToFlashcardVowel,
     )
 }
 
 @Composable
 fun FlashcardsScreen(
+    flashcardsState: FlashcardsState,
     navigateToFlashcardConsonant: (ConsonantClass?) -> Unit,
+    navigateToFlashcardVowel: (VowelClass?) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -48,78 +71,67 @@ fun FlashcardsScreen(
             text = "Flashcards",
             style = MaterialTheme.typography.headlineMedium
         )
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = "Consonants",
-                style = MaterialTheme.typography.titleLarge
-            )
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp)
-            ) {
-                items(ConsonantClass.entries) {
-                    val color = when (it) {
-                        ConsonantClass.Low -> LowClassColor
-                        ConsonantClass.Mid -> MidClassColor
-                        ConsonantClass.High -> HighClassColor
-                    }
-                    FlashcardCategoryCard(
-                        modifier = Modifier.size(128.dp),
-                        title = it.name,
-                        onClick = { navigateToFlashcardConsonant(it) },
-                        color = color,
-                        circleColor = color
-                    )
-                }
-                item {
-                    FlashcardCategoryCard(
-                        modifier = Modifier.size(128.dp),
-                        title = "All",
+        when (flashcardsState) {
+            is FlashcardsState.Success -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Card(
                         onClick = { navigateToFlashcardConsonant(null) },
-                    )
-                }
-            }
-        }
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
 
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = "Vowels",
-                style = MaterialTheme.typography.titleLarge
-            )
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp)
-            ) {
-                items(VowelClass.entries) {
-                    val (color, circleColor) = when (it) {
-                        VowelClass.Short -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f) to MaterialTheme.colorScheme.primary
-                        VowelClass.Long -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.primary
-                        VowelClass.Special -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.tertiary
+                        ) {
+                            Text(text = "Consonants", style = MaterialTheme.typography.titleMedium)
+                            Column(
+                                horizontalAlignment = Alignment.End,
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = "${
+                                        flashcardsState.consonantProgress.times(100).toInt()
+                                    }%",
+                                    style = MaterialTheme.typography.labelLarge
+                                )
+                                LinearProgressIndicator(
+                                    modifier = Modifier
+                                        .height(6.dp)
+                                        .width(120.dp),
+                                    progress = { flashcardsState.consonantProgress },
+                                    trackColor = MaterialTheme.colorScheme.surface,
+                                    strokeCap = StrokeCap.Round
+                                )
+                            }
+                        }
                     }
-                    FlashcardCategoryCard(
-                        modifier = Modifier.size(128.dp),
-                        title = it.name,
-                        onClick = { /*TODO*/ },
-                        color = color,
-                        circleColor = circleColor
-                    )
-                }
-                item {
-                    FlashcardCategoryCard(
-                        modifier = Modifier.size(128.dp),
-                        title = "All",
-                        onClick = { /*TODO*/ },
-                    )
+                    Card(
+                        onClick = { navigateToFlashcardVowel(null) },
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp)
+                        ) {
+                            Text(text = "Vowels", style = MaterialTheme.typography.titleMedium)
+                            Text(
+                                text = "Start your flashcard session",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
                 }
             }
-        }
 
+            FlashcardsState.Loading -> CircularProgressIndicator()
+        }
     }
 }
 
@@ -128,7 +140,12 @@ fun FlashcardsScreen(
 private fun FlashcardsScreenPreview() {
     RiianThaiTheme {
         FlashcardsScreen(
-            navigateToFlashcardConsonant = {}
+            flashcardsState = FlashcardsState.Success(
+                consonantProgress = 0.5f,
+                vowelProgress = 0.5f
+            ),
+            navigateToFlashcardConsonant = {},
+            navigateToFlashcardVowel = {}
         )
     }
 }
